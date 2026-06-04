@@ -47,14 +47,14 @@ def run_test(expr: str, desc: str = "Auto") -> dict | None:
     print(f"   🏃 Testing: {expr[:80]}…", flush=True)
 
     signal.signal(signal.SIGALRM, _timeout_handler)
-    signal.alarm(TEST_TIMEOUT)
+    signal.alarm(config.TEST_TIMEOUT)
 
     try:
         # 调用今天重写的、支持自动复权和 T+1 开盘滑点的终极引擎
         result = _get_ef()(
             expression=expr, description=desc,
             market=config.MARKET,
-            start_time="2023-01-01", end_time="2023-12-31",
+            start_time=config.START_TIME, end_time=config.END_TIME,
             despike=True, standardize=True, neutralize=True,
         )
         signal.alarm(0)

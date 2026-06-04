@@ -15,10 +15,13 @@
 **原因**：`Log` 是一元算子，**只有一个参数**，不需要窗口 `N`。  
 **正确写法**：`Mean(Log($volume), 5)`。
 
-## 4. 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨 CRITICAL REPEATED ERROR (17次): `Rank` 缺少窗口参数 `N`
-**报错**：`Rank.__init__() missing 1 required positional argument: 'N'`  
-**原因**：`Rank(expr, N)` 必须显式指定横截面分组窗口 `N`，即使它作为表达式的最外层算子也不能省略。例如 `Rank(Mean(..., 20))` 是错误的，必须写成 `Rank(Mean(..., 20), 20)` 或其它的合适窗口值。  
-**正确写法**：任何位置的 `Rank` 都写成 `Rank(expr, N)`，**绝对不要遗漏第二个参数**。
+## 4. 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨 CRITICAL REPEATED ERROR (19次): `Rank` 缺少窗口参数 `N` 或使用 `N=0`
+**报错**：`Rank.__init__() missing 1 required positional argument: 'N'` 或 `The Rolling(ATTR, 0) will not be accurately calculated`
+**原因**：
+1. `Rank(expr, N)` 必须显式指定窗口参数 `N`，绝不能省略。**此错误已发生19次**，请自查每一个 `Rank` 调用。
+2. Qlib 表达式中的 `Rank(x, N)` 是**时序排名（历史分位数）**，绝对不是横截面排名！如果你想做截面排名，表达式层面做不到，只能用时序排名代替。
+3. **严禁使用 `N=0`**（系统会报错并理解为累计至今）。所有滚动算子（如 `Rank`, `Mean`, `Std`, `Max`, `Min` 等）必须提供一个大于 0 的具体时间窗口（如 5, 10, 20, 60）。
+**正确写法**：任何位置的 `Rank` 都写成 `Rank(expr, N)`，其中 `N` 必须是一个具体且大于 0 的整数（例如 `Rank(expr, 20)`）。
 
 ## 5. 🚨🚨 CRITICAL REPEATED ERROR (2次): 使用了不存在的算子 `Delay`
 **报错**：`The operator [Delay] is not registered`  
@@ -28,9 +31,9 @@
 - `Zscore` ➔ `(expr - Mean(expr, N)) / Std(expr, N)`  
 - `Neg(expr)` ➔ `(-1 * expr)`
 
-## 6. 🚨🚨🚨🚨🚨 CRITICAL REPEATED ERROR (5次): `Max` / `Min` 算子窗口参数缺失或非整数，以及误用比较两个字段
+## 6. 🚨🚨🚨🚨🚨🚨 CRITICAL REPEATED ERROR (6次): `Max` / `Min` 算子窗口参数缺失或非整数，以及误用比较两个字段
 **报错**：`window must be an integer 0 or greater`  
-**原因**：`Max` 和 `Min` 是二元算子，需要一个表达式和一个整数窗口 `N`。**禁止使用 `Max(expr1, expr2)` 来比较两个字段**，此时第二个参数 `expr2` 会被当作窗口而报错。  
+**原因**：`Max` 和 `Min` 是二元算子，需要一个表达式和一个整数窗口 `N`。**禁止使用 `Max(expr1, expr2)` 来比较两个字段**，此时第二个参数 `expr2` 会被当作窗口而报错。**此错误已发生6次**，请自查所有 `Max`/`Min` 调用。  
 **正确写法**：`Max($close, 5)`。若需比较两个字段，**必须**使用 `If`。例如 `Max($close, $open)` 必须改为 `If($close > $open, $close, $open)`。
 
 ## 7. 🚨 CRITICAL REPEATED ERROR: `Div` 算子中括号位置错误导致除数为标量
@@ -47,7 +50,7 @@
 ## 9. 致命错误：使用了不存在的时序排名算子 (`Ts_Rank`)
 **报错**：`The operator [Ts_Rank] is not registered`  
 **原因**：Qlib 原生算子库不支持 `Ts_Rank`（时序排名）。  
-**正确写法**：请勿使用 `Ts_Rank`。若需排名请使用横截面排名 `Rank(expr, N)`，或改用其他原生支持的时序算子（如 `Roc`, `Mean` 等）。
+**正确写法**：请勿使用 `Ts_Rank`。若需排名请使用 `Rank(expr, N)`，或改用其他原生支持的时序算子（如 `Roc`, `Mean` 等）。
 
 ## 10. 🚨 致命错误：`Sign` 算子参数解析异常
 **报错**：`Sign.__init__() takes 2 positional arguments but 3 were given`  
@@ -90,7 +93,7 @@
 ## 17. 🚨 致命错误：使用了不存在的算子 `Ewma`
 **报错**：`The operator [Ewma] is not registered`  
 **原因**：Qlib 原生算子库不支持指数加权移动平均 `Ewma`。  
-**正确写法**：使用简单移动平均 `Mean(expr, N)` 作为近似替代，或根据需求自定义实现。示例将 `Ewma(expr, 20)` 替换为 `Mean(expr, 20)`。
+**正确写法**：使用简单移动平均 `Mean(expr, N)` 作为近似替代。示例将 `Ewma(expr, 20)` 替换为 `Mean(expr, 20)`。
 
 ## 18. 🚨 致命错误：使用了不存在的算子 `MarketNeutralize` 和 `IndNeutralize`
 **报错**：`The operator [MarketNeutralize] is not registered` 或 `The operator [IndNeutralize] is not registered`  
@@ -123,3 +126,50 @@
 示例修正：  
 原表达式 `Ref(Rank(Div(Sub($close, Low($low, 20)), Add(Sub(High($high, 20), Low($low, 20)), 1e-10)), 20), 1)`  
 改为 `Ref(Rank(Div(Sub($close, Min($low, 20)), Add(Sub(Max($high, 20), Min($low, 20)), 1e-10)), 20), 1)`。
+
+## 23. 🚨🚨 CRITICAL REPEATED ERROR (2次): 深度嵌套表达式导致括号匹配失败
+**报错**：`数据提取失败: unmatched ')'`  
+**原因**：Qlib 表达式解析器在处理极深嵌套、长度过大的表达式时，可能无法正确匹配括号，即使括号在逻辑上是平衡的。  
+**正确写法**：将复杂因子拆分为多个简单因子，通过中间变量预计算后再组合；或避免单层嵌套过深（例如超过5层）。如需组合多个因子，尽量使用 `Add` 或 `Mul` 连接，并控制每个子表达式的长度。示例：将巨型 `Mean(Sub(Rank(...), ...), 5)` 拆成两个因子 `Factor1 = Rank(...)` 和 `Factor2 = ...`，再通过 `Mean(Sub(Factor1, Factor2), 5)` 调用（但在单个表达式中无法直接实现中间变量，故建议将因子分段计算，在 Python 层面组合）。若必须在单表达式中完成，可尝试用运算符代替部分算子的嵌套，并确保每个算子参数齐全且闭括号正确。
+
+## 24. 🚨 致命错误：使用了不存在的算子 `RSI`
+**报错**：`The operator [RSI] is not registered`  
+**原因**：Qlib 原生算子库中没有相对强弱指标 `RSI` 算子。  
+**正确写法**：用原生算子组合模拟 RSI。例如对于 `RSI($close, 14)`，可使用以下近似（基于简单移动平均）：  
+`Div(Mul(100, Mean(If($close > Ref($close, 1), Sub($close, Ref($close, 1)), Mul($close, 0)), 14)), Add(Mean(If($close > Ref($close, 1), Sub($close, Ref($close, 1)), Mul($close, 0)), 14), Mean(If($close < Ref($close, 1), Sub(Ref($close, 1), $close), Mul($close, 0)), 14)))`  
+（注意常数 `Mul($close, 0)` 用于规避常数直接返回的类型错误）  
+若表达式过于复杂，可考虑在数据预处理阶段计算 RSI 作为新特征。
+
+## 25. 🚨🚨 CRITICAL REPEATED ERROR (2次): 使用了不存在的算子 `RoC`
+**报错**：`The operator [RoC] is not registered`  
+**原因**：Qlib 原生算子库中没有 `RoC`（Rate of Change / 价格变动率）算子。**此错误已发生2次**，请自查所有 `RoC` 调用。  
+**正确写法**：根据需求选择替代：  
+- 绝对变化（价差）：`Sub($close, Ref($close, N))`  
+- 变化率：`Div(Sub($close, Ref($close, N)), Ref($close, N))`  
+示例：`RoC($close,1)` 改为 `Sub($close, Ref($close, 1))`；若需变化率则改为 `Div(Sub($close, Ref($close, 1)), Ref($close, 1))`。注意需搭配 `If` 零值处理或分母加极小值避免除零。
+
+## 26. 🚨 CRITICAL: 一元负号 (`-`) 应用于算子组合表达式导致错误
+**报错**：`数据提取失败: bad operand type for unary -: 'Sub'`  
+**原因**：Qlib 表达式中的 `-` 不仅不能直接用于单个算子（如第1条），也不能直接用于由多个运算符组合而成的表达式（如 `-(2*$close - $high - $low)`），因为内部会被解析为 `Sub` 等算子，取负依然失败。  
+**正确写法**：将所有一元负号替换为乘以 `-1`，并用括号明确范围。例如：
+`Rank(Mean(-(2*$close - $high - $low)/($high - $low + 1e-10), 20), 60)`  
+必须改为  
+`Rank(Mean((-1 * (2*$close - $high - $low)) / ($high - $low + 1e-10), 20), 60)`  
+或更安全地完全使用 Qlib 原生算子重写整个表达式，避免混用算术符号。
+
+## 27. 🚨 致命错误：使用了不存在的算子 `Median`
+**报错**：`数据提取失败: The operator [Median] is not registered`  
+**原因**：Qlib 原生算子库中没有中位数算子 `Median`。  
+**正确写法**：使用简单移动平均 `Mean` 作为近似替代。例如 `Median(expr, 20)` 改为 `Mean(expr, 20)`。  
+示例修正（基于报错表达式）：  
+`Rank(Mul(-1, Div(Add(Median(...), 1e-10), Add(Std(Add(Median(...), 1e-10), 20), 1e-10))), 20)`  
+其中的两处 `Median(Log(Div(...)), 20)` 都应改为 `Mean(Log(Div(...)), 20)`。修正后表达式为：  
+`Rank(Mul(-1, Div(Add(Mean(Log(Div(Abs(Sub($close, Ref($close, 1))), Add($amount, 1e-10))), 20), 1e-10), Add(Std(Add(Mean(Log(Div(Abs(Sub($close, Ref($close, 1))), Add($amount, 1e-10))), 20), 1e-10), 20), 1e-10))), 20)`
+
+## 28. 🚨🚨🚨 CRITICAL REPEATED ERROR (3次): 纯常数运算（如 `Sub(0,1)`）导致类型错误
+**报错**：`数据提取失败: 'numpy.int64' object has no attribute 'name'`  
+**原因**：使用纯数字或纯数字组合的算子（如 `Sub(0,1)`, `Add(0,0)`）会生成标量而非 Feature 对象，当该标量作为其他算子的参数（如 `Mul`, `Mean`）时，因缺少特性属性而报错。**此错误已发生3次**。  
+**正确写法**：不要用算子去生成常数，直接使用字面量（如 `-1`, `0`, `1`）嵌入表达式，或确保常数始终与特征字段结合。例：  
+原错误 `Mul(Sub(0, 1), A)` → 修正为 `Mul(-1, A)`。  
+若必须使用 `Sub` 表达式中包含特征字段，如 `Sub(Mul($close, 0), 1)` 也是危险做法；最安全的是直接用 `-1 * A` 或 `Mul(-1, A)`，让 Qlib 将常数与特征正确广播。  
+**常见场景**：需要乘以负一时，直接写 `Mul(-1, ...)` 或 `(-1 * ...)`，不要用 `Sub(0, 1)`。

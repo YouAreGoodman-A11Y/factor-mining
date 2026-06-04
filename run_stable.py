@@ -25,24 +25,39 @@ def main():
     parser.add_argument("--market", type=str, default=config.MARKET, help="Qlib market pool (e.g. csi300, all_a_shares)")
     parser.add_argument("--features", type=str, default=config.FEATURES, help="Available base features")
     parser.add_argument("--operators", type=str, default=config.OPERATORS, help="Available operators")
-    parser.add_argument("--model", type=str, default=config.MODEL, help="LLM model (e.g. gemini/gemini-3.1-pro-preview)")
+    parser.add_argument("--model_proposer", type=str, default=getattr(config, "MODEL_PROPOSER", config.MODEL))
+    parser.add_argument("--model_coder", type=str, default=getattr(config, "MODEL_CODER", config.MODEL))
+    parser.add_argument("--task", type=str, default="")
+    parser.add_argument("--timeout", type=int, default=180)
+    parser.add_argument("--start_time", type=str, default="2023-01-01")
+    parser.add_argument("--end_time", type=str, default="2025-12-31")
+    parser.add_argument("--console", action="store_true", help="Print to console instead of log file")
     args = parser.parse_args()
 
     # Apply overrides to global config
-    config.MODEL = args.model
+    config.MODEL_PROPOSER = args.model_proposer
+    config.MODEL_CODER = args.model_coder
     config.MARKET = args.market
     if hasattr(config, "TASK_TEMPLATE"):
         config.TASK = config.TASK_TEMPLATE.format(market=args.market)
     config.FEATURES = args.features
     config.OPERATORS = args.operators
+    if args.task:
+        config.TASK = args.task
+    config.TEST_TIMEOUT = args.timeout
+    config.START_TIME = args.start_time
+    config.END_TIME = args.end_time
 
     thresholds = STRICTNESS[args.strictness]
 
     # Logging
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = f"{LOG_DIR}/run_{config.MARKET}_{timestamp}.log"
-    sys.stdout = open(log_file, "a", buffering=1)  # line-buffered = 实时
-    sys.stderr = sys.stdout
+    if not args.console:
+        sys.stdout = open(log_file, "a", buffering=1)
+        sys.stderr = sys.stdout
+    else:
+        print(f"Logging to console (and saving to {log_file} would be skipped, or handle via tee)")
 
     # Pools
     alpha_pool = FactorPool("alpha_pool")
@@ -52,8 +67,9 @@ def main():
     print(f"\n{'='*60}")
     print(f"  FACTOR MINER X — Stable Run")
     print(f"  Task: {TASK[:60]}...")
-    print(f"  Model: deepseek-chat | Strictness: {args.strictness}")
-    print(f"  Iterations: {args.iterations} | Timeout: {TEST_TIMEOUT}s")
+    print(f"  Proposer: {config.MODEL_PROPOSER} | Coder: {config.MODEL_CODER}")
+    print(f"  Strictness: {args.strictness}")
+    print(f"  Iterations: {args.iterations} | Timeout: {config.TEST_TIMEOUT}s")
     print(f"  Market: {config.MARKET}")
     print(f"  Features: {config.FEATURES[:60]}...")
     print(f"  Started: {datetime.datetime.now().isoformat()}")
@@ -239,8 +255,36 @@ def main():
                 print(f"      🧠 [Reflection] {exp_text[:100]}...", flush=True)
                 experience_history.append(exp_text)
                 
+                
                 # 5. Critic A 判定
                 a_passed, a_fails = critic_a_review(new_expr, ref_metrics, thresholds)
+                
+                # --- [ADD] Log to refine_log.jsonl ---
+                try:
+                    import json, os
+                    refine_log_dir = os.path.join(config.POOL_DIR, "refined_attempts")
+                    os.makedirs(refine_log_dir, exist_ok=True)
+                    log_entry = {
+                        "timestamp": datetime.datetime.now().isoformat(),
+                        "iteration": iteration,
+                        "expr_index": j,
+                        "attempt": loop_idx + 1,
+                        "original_expr": base_expr,
+                        "refined_expr": new_expr,
+                        "direction": direction,
+                        "rank_ic": ref_metrics.get("Rank_IC"),
+                        "ic_ir": ref_metrics.get("Rank_IC_IR"),
+                        "mono": ref_metrics.get("Monotonicity_Score"),
+                        "turnover": ref_metrics.get("Top_Quantile_Daily_Turnover"),
+                        "annual_ls": ref_metrics.get("Annual_Long_Short_Return"),
+                        "decision": "accept" if a_passed else "reject"
+                    }
+                    with open(os.path.join(refine_log_dir, "refine_log.jsonl"), "a", encoding="utf-8") as rf:
+                        rf.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
+                except Exception as e:
+                    pass
+                # -------------------------------------
+
                 if a_passed:
                     final_decision = "accept"
                     final_expr = new_expr

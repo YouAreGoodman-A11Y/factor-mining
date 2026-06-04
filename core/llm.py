@@ -9,8 +9,14 @@ MODEL = "gemini/gemini-2.5-pro"
 def llm_call(system: str, user: str, temp: float = 0.7, label: str = "") -> str | None:
     """Call LLM via litellm and return parsed text (stripped of markdown fences)."""
     try:
-        from core.config import MODEL as config_model
-        model_name = config_model
+        from core.config import MODEL_PROPOSER, MODEL_CODER, MODEL
+        # Heterogeneous engine routing based on label
+        if label == "proposer":
+            model_name = MODEL_PROPOSER
+        elif label in ["builder", "update_syntax_guide", "refine_diagnose", "refine_coder", "refine_verify", "refine_post_eval"]:
+            model_name = MODEL_CODER
+        else:
+            model_name = MODEL_CODER
     except ImportError:
         model_name = MODEL
 

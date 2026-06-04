@@ -45,7 +45,7 @@ def build_expressions(hypothesis: str, count: int = 3) -> list[str]:
         f"Available Features: {config.FEATURES}\n"
         "AVOID: Do NOT use features not listed above.\n"
         f"Available Operators: {config.OPERATORS}\n"
-        "CRITICAL: Rank(x,N) MUST have window N. Std(x,N) MUST have window N. "
+        "CRITICAL: Rank(x,N) MUST have a window N > 0 (Time-series percentile). NEVER use N=0. Std(x,N) MUST have window N. "
         "Every operator needs its window parameter.\n"
         "CRITICAL: And(A,B) and Or(A,B) take EXACTLY 2 arguments. "
         "For 3+ conditions use nesting: And(A, And(B, C)).\n"
@@ -201,7 +201,7 @@ def critic_debate(expr: str, metrics: dict, thresholds: dict):
     b_ic = abs(ic_val)
     if b_ic < th["min_ic"]:
         fails_a.append(f"Rank_IC_abs={b_ic:.4f} < {th['min_ic']}")
-        suggestions_a.append("尝试加入Rank()变换、横截面标准化或改变均线窗口长度来增强因子线性/秩相关性。")
+        suggestions_a.append("尝试加入时序分位数变换 Rank(x, 20)（注意N不能等于0）或改变均线窗口长度来增强因子线性/秩相关性。")
     
     b_ir = abs(ir_val)
     if b_ir < th["min_ic_ir"]:
@@ -219,7 +219,7 @@ def critic_debate(expr: str, metrics: dict, thresholds: dict):
     b_mono = abs(mono_val)
     if b_mono < th["min_mono"]:
         fails_a.append(f"Monotonicity_abs={b_mono:.4f} < {th['min_mono']}")
-        suggestions_a.append("分组收益非单调递增/递减。可能是因子两头强中间弱。尝试秩变换Rank()或去除两端极值逻辑来改善分层。")
+        suggestions_a.append("分组收益非单调递增/递减。可能是因子两头强中间弱。尝试时序分位数变换 Rank(x, 20)（注意N不能等于0）或去除两端极值逻辑来改善分层。")
         
     if turn_val > 0.60:
         fails_a.append(f"Turnover={turn_val:.4f} > 0.60")

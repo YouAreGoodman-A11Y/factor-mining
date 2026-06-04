@@ -15,7 +15,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:03:17.696910",
-    "name": "alpha_1_i1_e3"
+    "name": "alpha_1_i1_e3",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top decile of 5-day returns, when scaled by the inverse of their 20-day volatility, exhibit significantly higher next-day returns than those in the bottom decile, driven by risk-adjusted",
@@ -33,7 +34,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:04:15.284304",
-    "name": "alpha_2_i2_e1"
+    "name": "alpha_2_i2_e1",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top decile of 5-day returns, when scaled by the inverse of their 20-day volatility, exhibit significantly higher next-day returns than those in the bottom decile, driven by risk-adjusted",
@@ -51,7 +53,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:05:12.575716",
-    "name": "alpha_3_i2_e2"
+    "name": "alpha_3_i2_e2",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top decile of 5-day returns, when scaled by the inverse of their 20-day volatility, exhibit significantly higher next-day returns than those in the bottom decile, driven by risk-adjusted",
@@ -69,7 +72,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:06:11.949483",
-    "name": "alpha_4_i2_e3"
+    "name": "alpha_4_i2_e3",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top quartile of rank-transformed 5-day returns, conditioned on above-median 20-day volume and a non-negative 1-day return on the formation day, outperform the bottom quartile by 40 basis",
@@ -87,10 +91,11 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:13:06.601981",
-    "name": "alpha_5_i4_e3"
+    "name": "alpha_5_i4_e3",
+    "market": "all_a_shares"
   },
   {
-    "hypothesis": "Stocks with the highest quintile of 5-day returns, when volume-weighted and filtered for above-median 5-day volume relative to their own 20-day average, exhibit next-day returns 20–40 bps higher than ",
+    "hypothesis": "Stocks with the highest quintile of 5-day returns, when volume-weighted and filtered for above-median 5-day volume relative to their own 20-day average, exhibit next-day returns 20\u201340 bps higher than ",
     "expression": "($volume / Mean($volume,20))",
     "metrics": {
       "IC": -0.0192,
@@ -105,10 +110,11 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:22:59.580353",
-    "name": "alpha_6_i7_e2"
+    "name": "alpha_6_i7_e2",
+    "market": "all_a_shares"
   },
   {
-    "hypothesis": "Stocks with the highest quintile of 5-day returns, when volume-weighted and filtered for above-median 5-day volume relative to their own 20-day average, exhibit next-day returns 20–40 bps higher than ",
+    "hypothesis": "Stocks with the highest quintile of 5-day returns, when volume-weighted and filtered for above-median 5-day volume relative to their own 20-day average, exhibit next-day returns 20\u201340 bps higher than ",
     "expression": "Rank(Delta($close,5),5)/Std(Delta($close,5),5)",
     "metrics": {
       "IC": 0.0091,
@@ -123,7 +129,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:24:48.830630",
-    "name": "alpha_7_i7_e3"
+    "name": "alpha_7_i7_e3",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top quintile of 5-day returns, after rank-transforming both returns and 20-day volatility and dividing the former by the latter to create a volatility-scaled momentum score, exhibit a ne",
@@ -141,7 +148,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T16:26:41.626874",
-    "name": "alpha_8_i8_e2"
+    "name": "alpha_8_i8_e2",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top decile of 5-day returns, after dividing the 5-day return by the standard deviation of 20-day daily returns to create a volatility-scaled momentum score and confirming with above-medi",
@@ -159,7 +167,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T17:24:44.545148",
-    "name": "alpha_9_i1_e1"
+    "name": "alpha_9_i1_e1",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top quintile of 5-day returns, after rank-transforming both the 5-day return and 20-day average daily volume and multiplying the return rank by the volume rank to create a volume-confirm",
@@ -177,7 +186,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T17:40:58.955069",
-    "name": "alpha_10_i1_e1"
+    "name": "alpha_10_i1_e1",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top quintile of 5-day returns, after rank-transforming both the 5-day return and 20-day average daily volume and multiplying the return rank by the volume rank to create a volume-confirm",
@@ -195,7 +205,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T17:42:03.727798",
-    "name": "alpha_11_i1_e2"
+    "name": "alpha_11_i1_e2",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top quintile of 5-day returns, after rank-transforming both the 5-day return and 20-day average daily volume and multiplying the return rank by the volume rank to create a volume-confirm",
@@ -213,7 +224,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T17:43:07.497040",
-    "name": "alpha_12_i1_e3"
+    "name": "alpha_12_i1_e3",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top quintile of 5-day returns, after rank-transforming the 5-day return and multiplying by the rank of 5-day average volume to create a volume-weighted momentum score, exhibit significan",
@@ -231,7 +243,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T17:50:22.862754",
-    "name": "alpha_13_i4_e1"
+    "name": "alpha_13_i4_e1",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks in the top decile of 5-day returns, after rank-transforming both the 5-day return and 20-day volatility, then dividing the return rank by the volatility rank to create a volatility-scaled momen",
@@ -249,7 +262,8 @@
       "Valid_Days": 242
     },
     "timestamp": "2026-05-19T17:53:55.164436",
-    "name": "alpha_14_i5_e1"
+    "name": "alpha_14_i5_e1",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks with the highest quintile of 5-day returns, after rank-transforming both the 5-day return and 5-day average volume, then multiplying these ranks to create a volume-weighted momentum score, exhi",
@@ -270,7 +284,8 @@
       "Ann_Ret_Q5": 0.122216
     },
     "timestamp": "2026-05-21T14:39:43.545149",
-    "name": "alpha_15_i3_e1"
+    "name": "alpha_15_i3_e1",
+    "market": "all_a_shares"
   },
   {
     "hypothesis": "Stocks with the highest quintile of 5-day returns, after rank-transforming both the 5-day return and 5-day average volume, then multiplying these ranks to create a volume-weighted momentum score, exhi",
@@ -291,10 +306,11 @@
       "Ann_Ret_Q5": 0.100206
     },
     "timestamp": "2026-05-21T14:43:35.285179",
-    "name": "alpha_16_i3_e3"
+    "name": "alpha_16_i3_e3",
+    "market": "all_a_shares"
   },
   {
-    "hypothesis": "For CSI300 constituents, an elevated \"Distribution Churn\" factor—mathematically defined as the ratio of relative volume to the normalized intraday price range `(Volume / SMA(Volume, 20)) / ((High - Lo",
+    "hypothesis": "For CSI300 constituents, an elevated \"Distribution Churn\" factor\u2014mathematically defined as the ratio of relative volume to the normalized intraday price range `(Volume / SMA(Volume, 20)) / ((High - Lo",
     "expression": "Mean(Div(Div($volume, Mean($volume, 20)), Add(Div(Sub($high, $low), $close), 0.00001)), 5)",
     "market": "csi300",
     "metrics": {
@@ -316,7 +332,7 @@
     "name": "alpha_17_i8_e2_csi300"
   },
   {
-    "hypothesis": "For CSI300 constituents, the “Gap & Intraday Fade Multiplier” factor, defined as `(Open / lag(Close,1) - 1) * ((High + Low - 2 * Open) / (High - Low + 1e-8)) * (Volume / SMA(Volume, 20) - 1)`, negativ",
+    "hypothesis": "For CSI300 constituents, the \u201cGap & Intraday Fade Multiplier\u201d factor, defined as `(Open / lag(Close,1) - 1) * ((High + Low - 2 * Open) / (High - Low + 1e-8)) * (Volume / SMA(Volume, 20) - 1)`, negativ",
     "expression": "Mean(Add(Add(Mul(Abs(Mean(Sub(Div($open, Ref($close, 1)), 1), 5)), 0.35), Mul(Abs(Mean(Div(Div(Sub(Add($high, $low), Mul(2, $open)), Add(Sub($high, $low), 1e-8)), Std(Sub($high, $low), 10)), 5)), 0.25)), Mul(Abs(Mean(Div($volume, Mean($volume, 10)), 5)), 0.4)), 5)",
     "market": "csi300",
     "metrics": {
@@ -404,7 +420,7 @@
     "name": "alpha_21_i3_e1_csi300"
   },
   {
-    "hypothesis": "Grounded in inventory risk theory and liquidity-driven mean reversion, intraday price markups lacking volume support—mathematically defined as the close minus the execution consensus `Div(Div($amount,",
+    "hypothesis": "Grounded in inventory risk theory and liquidity-driven mean reversion, intraday price markups lacking volume support\u2014mathematically defined as the close minus the execution consensus `Div(Div($amount,",
     "expression": "Mean(Corr(Rank(Div(Sub($close, Div($amount, Add($volume, 1e-8))), $close), 20), Rank($volume, 20), 20), 10)",
     "market": "csi300",
     "metrics": {
@@ -426,7 +442,7 @@
     "name": "alpha_22_i13_e2_csi300"
   },
   {
-    "hypothesis": "Grounded in the disposition effect and panic-selling climaxes, a stock that closes in the lowest 20% of its daily range (Close ≤ Low + 0.2×(High – Low)) with volume exceeding its 20-day average plus o",
+    "hypothesis": "Grounded in the disposition effect and panic-selling climaxes, a stock that closes in the lowest 20% of its daily range (Close \u2264 Low + 0.2\u00d7(High \u2013 Low)) with volume exceeding its 20-day average plus o",
     "expression": "Mean((-1 * Div(Mean(Sub(Div($volume, Add(Mean($volume, 60), 1e-10)), Div(Sub($close, $low), Add(Sub($high, $low), 1e-10))), 60), Add(Std(Sub(Div($volume, Add(Mean($volume, 60), 1e-10)), Div(Sub($close, $low), Add(Sub($high, $low), 1e-10))), 60), 1e-8))), 10)",
     "market": "csi300",
     "metrics": {
@@ -446,5 +462,27 @@
     },
     "timestamp": "2026-05-27T17:33:59.009719",
     "name": "alpha_23_i11_e3_csi300"
+  },
+  {
+    "hypothesis": "Grounded in the behavioral finance theory of lottery-ticket preference and skewness premiums, CSI 300 stocks operating within a persistently low-volatility regime that exhibit negative intraday price ",
+    "expression": "Div(Sum(If($close < $open, Add(Mul($close, 0), 1), Mul($close, 0)), 20), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-5)), 20), 1e-5))",
+    "market": "csi300",
+    "metrics": {
+      "Rank_IC": 0.044267,
+      "Rank_IC_IR": 0.234366,
+      "Rank_IC_P_Value": 0.000336,
+      "Rank_IC_Positive_Rate": 0.5851,
+      "Annual_Long_Short_Return": -0.05826500058174133,
+      "Annual_Long_Short_Sharpe": -0.2905,
+      "Monotonicity_Score": -0.8,
+      "Top_Quantile_Daily_Turnover": 0.1189,
+      "Ann_Ret_Q1": 0.040615,
+      "Ann_Ret_Q2": 0.029258,
+      "Ann_Ret_Q3": 0.086638,
+      "Ann_Ret_Q4": 0.041881,
+      "Ann_Ret_Q5": 0.09888
+    },
+    "timestamp": "2026-06-01T15:18:03.404385",
+    "name": "alpha_24_i8_e2_csi300"
   }
 ]
