@@ -13,7 +13,7 @@ import subprocess
 from datetime import datetime
 
 # 1. 目标股票池 (支持 csi300, csi500, csi1000, all_a_shares)
-MARKET = "all_a_shares"
+MARKET = "csi300"
 
 # 根据股票池自动切换工作目录与超时保护
 if MARKET == "all_a_shares":
@@ -35,14 +35,14 @@ CODER = "deepseek/deepseek-v4-pro"
 STRICTNESS = "normal"
 
 # 5. 挖掘轮数
-ITERATIONS = 20
+ITERATIONS = 50
 
 # 6. 底层容许使用的基础字段 (加入了刚刚探讨的 pct_chg)
 FEATURES = "$close, $open, $high, $low, $amount, $volume, $pct_chg"
 
 # 7. 挖掘定向任务配置 (发散式多样化任务)
 TASK = (
-    "Targeting the current market. 核心目标：寻找多样化的量价定价错误特征，建立丰富正交的因子库... "
+    "Targeting the current market. 核心目标：在csi300中，寻找多样化的量价定价错误特征，建立丰富正交的因子库... "
     "请在这 5 个核心领域中自由穿梭、发散探索："
     "1) 【动量与趋势】不同时间窗的绝对/相对动量突破、动量惯性及加速度；"
     "2) 【量价微观结构】聪明钱动向、量价共振或背离、日内收益与隔夜收益的博弈异常；"

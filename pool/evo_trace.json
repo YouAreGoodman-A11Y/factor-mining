@@ -6705,5 +6705,2973 @@
         "ic_ir": 0.09662
       }
     ]
+  },
+  {
+    "iteration": 1,
+    "timestamp": "2026-06-04T11:50:27.834427",
+    "hypothesis": "Grounded in the behavioral finance principle of prospect theory and microstructure theories of institutional distribution, stocks exhibiting a high cross-sectional rank in the 20-day rolling correlati",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Corr(Sub($close, Ref($close, 1)), $volume, 20)",
+        "final_expr": "Rank(Div(Sum(Mul(Div(Sub($close, Ref($close, 1)), Ref($close, 1)), $volume), 20), Add(Mul(Sum($volume, 20), Std(Div(Sub($close, Ref($close, 1)), Ref($close, 1)), 20)), 1e-10)), 20)",
+        "decision": "reject",
+        "rank_ic": -0.014009,
+        "ic_ir": -0.093599
+      },
+      {
+        "expr": "Mean(Corr(Sub($close, $open), $volume, 20), 10)",
+        "final_expr": "Mean(Corr(Rank(Div($close, $open), 20), Rank($volume, 20), 20), 5)",
+        "decision": "reject",
+        "rank_ic": -0.011846,
+        "ic_ir": -0.089172
+      },
+      {
+        "expr": "Rank(Corr(Sub($close, Ref($close, 1)), Sub($volume, Ref($volume, 1)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "timestamp": "2026-06-04T12:04:03.903093",
+    "hypothesis": "Grounded in the microstructure theory of institutional order-splitting and stealth accumulation, stocks exhibiting a high cross-sectional rank in their volume-adjusted 20-day price efficiency—mathemat",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mul(-1, Rank(Std(Div(Sub($close, Ref($close,1)), Add($volume, 1e-10)), 20), 60))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($close, Ref($close,1)), $volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Sub(Mean(Div(Sub($close, Ref($close,1)), Add($volume, 1e-10)), 5), Mean(Div(Sub($close, Ref($close,1)), Add($volume, 1e-10)), 20)), 60)",
+        "final_expr": "Rank(Mean(Div(Sub($close, Ref($close, 5)), Add(Std($close, 20), 1e-10)), 3), 60)",
+        "decision": "reject",
+        "rank_ic": -0.013266,
+        "ic_ir": -0.077568
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "timestamp": "2026-06-04T12:08:07.602298",
+    "hypothesis": "Grounded in the behavioral finance principle of cumulative prospect theory and lottery-ticket preference, stocks exhibiting a high cross-sectional rank in their volume-amplified return skewness—mathem",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Sub(Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) > 0, Mul(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), $volume), Mul($close,0)), 20), Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) < 0, Mul(Abs(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), $volume), Mul($close,0)), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(Rank(Div(Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) > 0, Mul(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), $volume), Mul($close,0)), 20), Add(Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) < 0, Mul(Abs(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), $volume), Mul($close,0)), 20), 1e-10)), 20), Rank($volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "timestamp": "2026-06-04T12:20:34.327424",
+    "hypothesis": "Grounded in the microstructure theory of institutional order execution and inventory accumulation, stocks exhibiting a high cross-sectional rank in the 20-day rolling covariance between daily trading ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Mul(Sub(Sub(Div($close, Ref($close, 1)), 1), Mean(Sub(Div($close, Ref($close, 1)), 1), 20)), Sub($volume, Mean($volume, 20))), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Sub(Sub($high, $low), Mean(Sub($high, $low), 20)), Sub($volume, Mean($volume, 20))), 20), 20)",
+        "final_expr": "Rank(Mean(Mul(Rank(Sub($high, $low), 20), Rank(Sub($volume, Mean($volume, 20)), 20)), 20), 20)",
+        "decision": "reject",
+        "rank_ic": -0.009372,
+        "ic_ir": -0.082266
+      },
+      {
+        "expr": "Rank(Mean(Mul(Sub(Log(Div($close, Ref($close, 1))), Mean(Log(Div($close, Ref($close, 1))), 20)), Sub($volume, Mean($volume, 20))), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "timestamp": "2026-06-04T12:46:14.749295",
+    "hypothesis": "Grounded in the microstructure theory of institutional stealth distribution and late-day retail markup, stocks exhibiting a high cross-sectional rank in their volume-amplified closing price deviation ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Div(Mul($volume, Sub($close, $vwap)), Add(Sub($high, $low), 1e-10)), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Div(Mul($volume, Abs(Sub($close, Div(Add($high, $low), 2)))), Add(Mean($volume, 20), 1e-10)), 20)",
+        "final_expr": "Rank(Mean(Div(Mul($volume, Sub($close, Div(Add($high, $low), 2))), Add(Mean($volume, 20), 1e-10)), 5), 20)",
+        "decision": "reject",
+        "rank_ic": -0.015212,
+        "ic_ir": -0.10063
+      },
+      {
+        "expr": "Rank(Mul(Div($volume, Add(Mean($volume, 10), 1e-10)), Div(Sub($close, $open), Add(Sub($high, $low), 1e-10))), 10)",
+        "final_expr": "Mul(-1, Rank(Mean(Div(Sub($close, $open), Add(Sub($high, $low), 1e-10)), 5), 10))",
+        "decision": "reject",
+        "rank_ic": 0.017182,
+        "ic_ir": 0.106008
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "timestamp": "2026-06-04T12:51:30.009921",
+    "hypothesis": "Grounded in the market microstructure theory of information asymmetry and stealth distribution, stocks exhibiting a high cross-sectional rank in their intraday execution premium—mathematically defined",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 0,
+    "results": [
+      {
+        "expr": "Rank(Div(Sub($close, $vwap), Add(Sub($high, $low), 1e-10)), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mul(Div($vwap, $open), Div($volume, Mean($volume, 60))), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Corr($volume, Sub($close, $vwap), 20), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 7,
+    "timestamp": "2026-06-04T13:16:00.340670",
+    "hypothesis": "Grounded in the behavioral finance \"frog-in-the-pan\" hypothesis of limited investor attention, stocks exhibiting a high cross-sectional rank in their continuous price trajectory—mathematically defined",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Mean(If($close > Ref($close, 1), Add(Mul($close, 0), 1), If($close < Ref($close, 1), Sub(Mul($close, 0), 1), Mul($close, 0))), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Div(Sum(Sub($close, Ref($close, 1)), 60), Add(Sum(Abs(Sub($close, Ref($close, 1))), 60), 1e-10))",
+        "final_expr": "Rank(Div(Sum(Sub($close, Ref($close, 1)), 20), Add(Mul(Std(Sub($close, Ref($close, 1)), 20), 20 ** 0.5), 1e-10)), 20)",
+        "decision": "reject",
+        "rank_ic": -0.011384,
+        "ic_ir": -0.070548
+      },
+      {
+        "expr": "Rank(Div(Mean(Sub($close, Ref($close, 1)), 60), Add(Std(Sub($close, Ref($close, 1)), 60), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 8,
+    "timestamp": "2026-06-04T13:42:48.958519",
+    "hypothesis": "Grounded in the market microstructure theory of informed institutional distribution and retail noise trading, stocks exhibiting a high cross-sectional rank in their amount-amplified overnight-to-intra",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Div(Mul(Sub(Div($open, Ref($close, 1)), 1), $volume), Mean($volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mul(Div(Abs(Sub($open, Ref($close, 1))), Sub($high, $low)), $volume), Mean($volume, 20)), 60)",
+        "final_expr": "Rank(Mean(Mul(-1, Div(Sum(Sub($open, Ref($close, 1)), 10), Add(Std($close, 20), 1e-10))), 20), 60)",
+        "decision": "reject",
+        "rank_ic": 0.009877,
+        "ic_ir": 0.082698
+      },
+      {
+        "expr": "Rank(Sum(Mul(Sub($open, Ref($close, 1)), $volume), 5), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 9,
+    "timestamp": "2026-06-04T13:57:23.494286",
+    "hypothesis": "Grounded in the behavioral finance \"lottery-ticket\" hypothesis and liquidity exhaustion, stocks exhibiting a high cross-sectional rank in their 20-day upside price skewness—mathematically defined as t",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Mean(If(Sub(Div($close, Ref($close,1)), 1) > 0, Mul(Sub(Div($close, Ref($close,1)), 1), Sub(Div($close, Ref($close,1)), 1)), Mul($close,0)), 20), Add(Mean(If(Sub(Div($close, Ref($close,1)), 1) < 0, Mul(Sub(Div($close, Ref($close,1)), 1), Sub(Div($close, Ref($close,1)), 1)), Mul($close,0)), 20), 1e-10)), 20)",
+        "final_expr": "Rank(Div(Div(Mean(If(Sub(Div($close, Ref($close,1)), 1) > 0, Sub(Div($close, Ref($close,1)), 1), Mul($close,0)), 40), Add(Mean(If(Sub(Div($close, Ref($close,1)), 1) < 0, Mul(-1, Sub(Div($close, Ref($close,1)), 1)), Mul($close,0)), 40), 1e-6)), Std(Sub(Div($close, Ref($close,1)), 1), 40)), 20)",
+        "decision": "reject",
+        "rank_ic": -0.002988,
+        "ic_ir": -0.018341
+      },
+      {
+        "expr": "Rank(Div(Sub(Max(Sub(Div($close, Ref($close,1)), 1), 20), Mean(Sub(Div($close, Ref($close,1)), 1), 20)), Add(Std(Sub(Div($close, Ref($close,1)), 1), 20), 1e-10)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(If(Sub(Div($close, Ref($close,1)), 1) > 0, Sub(Div($close, Ref($close,1)), 1), Mul($close,0)), 20), Add(Mean(If(Sub(Div($close, Ref($close,1)), 1) < 0, Mul(-1, Sub(Div($close, Ref($close,1)), 1)), Mul($close,0)), 20), 1e-10)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 10,
+    "timestamp": "2026-06-04T14:10:08.340753",
+    "hypothesis": "Grounded in the market microstructure theory of inventory risk and liquidity provision, stocks exhibiting an extremely low cross-sectional rank in their volume-weighted price deviation—mathematically ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 1,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Mul(Sub($close, $vwap), $volume)), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mul(-1, Mul(Sub($close, Mean($close, 20)), Rank($volume, 20))), 60)",
+        "final_expr": "Rank(Mean(Mul(-1, Sum(Sub(Div($close, Ref($close, 1)), 1), 5)), 5), 20)",
+        "decision": "reject",
+        "rank_ic": 0.008787,
+        "ic_ir": 0.05521
+      },
+      {
+        "expr": "Rank(Mul(-1, Mul(Div(Sub($close, $vwap), Add($vwap, 1e-8)), $volume)), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "timestamp": "2026-06-04T21:22:48.224959",
+    "hypothesis": "Grounded in the market microstructure theory of information asymmetry and stealth institutional distribution, stocks exhibiting an extremely low cross-sectional rank in the 20-day time-series covarian",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mul(-1, Rank(Corr($close, $volume, 20), 20))",
+        "final_expr": "Mul(Mean(Abs(Corr(Rank($close, 20), Rank($volume, 20), 20)), 5), Std($close, 20))",
+        "decision": "reject",
+        "rank_ic": -0.023583,
+        "ic_ir": -0.120052
+      },
+      {
+        "expr": "Mul(-1, Rank(Corr(Sub($close, Ref($close, 1)), Sub($volume, Ref($volume, 1)), 20), 20))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Mul(-1, Rank(Mean(Mul(Sub($close, Ref($close, 1)), Sub($volume, Ref($volume, 1))), 20), 20))",
+        "final_expr": "Rank(Mean(Corr(Sub($close, Ref($close, 1)), Sub($volume, Ref($volume, 1)), 20), 10), 20)",
+        "decision": "reject",
+        "rank_ic": -0.011954,
+        "ic_ir": -0.110982
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "timestamp": "2026-06-04T21:25:20.306802",
+    "hypothesis": "Grounded in the behavioral finance theory of the disposition effect and delayed price discovery, stocks exhibiting a strong volume-price resonance indicate informed institutional capital systematicall",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr(Delta($close, 1), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Delta($close, 1), Log(Add($volume, 1e-10))), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Ref($volume, 1), Delta($close, 1)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "timestamp": "2026-06-04T21:50:15.959020",
+    "hypothesis": "Grounded in the market microstructure theory of informed liquidity provision and A-share T+1 settlement constraints, stocks exhibiting a high cross-sectional rank in their volume-amplified intraday re",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul($volume, Sub($close, $open)), 60)",
+        "final_expr": "Rank(Mean(Mul($volume, Sub($close, $open)), 5), 20)",
+        "decision": "reject",
+        "rank_ic": -0.015696,
+        "ic_ir": -0.102656
+      },
+      {
+        "expr": "Ref(Rank(Mul($volume, Sub($close, $open)), 20), 1)",
+        "final_expr": "WMA(Rank(Div(Mul($volume, Sub(Div($close, Add($open, 1e-10)), 1)), Add(Mul(Std(Mul($volume, Sub(Div($close, Add($open, 1e-10)), 1)), 20), Mean($volume, 20)), 1e-8)), 20), 5)",
+        "decision": "reject",
+        "rank_ic": -0.016833,
+        "ic_ir": -0.105083
+      },
+      {
+        "expr": "Rank(Div(Mul($volume, Sub($high, $low)), Add(Std(Mul($volume, Sub($high, $low)), 60), 1e-10)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "timestamp": "2026-06-04T22:12:03.179106",
+    "hypothesis": "Grounded in the behavioral finance theory of limited investor attention and the \"frog-in-the-pan\" effect, stocks exhibiting a high cross-sectional rank in continuous information diffusion—mathematical",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Mean(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 5), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 5), 1e-10)), 60)",
+        "final_expr": "Rank(Div(Mean(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 5), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 5), 1e-10)), 20)",
+        "decision": "reject",
+        "rank_ic": -0.018966,
+        "ic_ir": -0.115353
+      },
+      {
+        "expr": "Rank(Mean(If($close > Ref($close, 1), Add(Mul($close, 0), 1), Mul($close, 0)), 20), 60)",
+        "final_expr": "Rank(Mean(Div(Sub(Div($close, Ref($close, 1)), 1), Add(Std(Sub(Div($close, Ref($close, 1)), 1), 20), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "rank_ic": -0.009012,
+        "ic_ir": -0.051577
+      },
+      {
+        "expr": "Rank(Mul(-1, Div($volume, Mean($volume, 20))), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "timestamp": "2026-06-04T22:14:42.905808",
+    "hypothesis": "Grounded in the behavioral finance theory of investor lottery-preference and the idiosyncratic volatility puzzle, stocks exhibiting extreme positive return skewness—mathematically defined by a high cr",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Mean(If(Div($close, Ref($close,1)) > 1, Sub(Div($close, Ref($close,1)), 1), Mul($close,0)), 20), Add(Mean(Abs(If(Div($close, Ref($close,1)) < 1, Sub(Div($close, Ref($close,1)), 1), Mul($close,0))), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Max(Sub(Div($close, Ref($close,1)), 1), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(Power(Sub(Div($close, Ref($close,1)), 1), 3), 20), Add(Power(Std(Sub(Div($close, Ref($close,1)), 1), 20), 3), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "timestamp": "2026-06-04T22:33:54.940048",
+    "hypothesis": "Grounded in the market microstructure theory of liquidity shocks and the behavioral bias of investor overreaction, stocks exhibiting an extremely low cross-sectional rank in the product of their short",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul($volume, Sub($close, $open)), 20)",
+        "final_expr": "-1 * Rank(Mean(Mul($volume, Sub($close, $open)), 5), 20)",
+        "decision": "reject",
+        "rank_ic": 0.015696,
+        "ic_ir": 0.102656
+      },
+      {
+        "expr": "Mul(-1, Rank(Mul($volume, Sub($close, Ref($close, 1))), 60))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mul($volume, Sub($close, $open)), Add(Mean(Mul($volume, Sub($close, $open)), 20), 1e-10)), 20)",
+        "final_expr": "Rank(Mean(Div(Sub(Mul($volume, Sub($close, $open)), Mean(Mul($volume, Sub($close, $open)), 20)), Add(Std(Mul($volume, Sub($close, $open)), 20), 1e-10)), 5), 20)",
+        "decision": "reject",
+        "rank_ic": -0.014892,
+        "ic_ir": -0.099708
+      }
+    ]
+  },
+  {
+    "iteration": 7,
+    "timestamp": "2026-06-04T22:43:26.677753",
+    "hypothesis": "Grounded in the behavioral finance theory of herding and momentum exhaustion, stocks exhibiting a high cross-sectional rank in short-term cumulative returns combined with a strongly negative time-seri",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mul(Rank(Sum(Sub($close, Ref($close, 1)), 5), 20), Mean(Sub($close, Ref($close, 1)), 5))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Mul(Rank(Sum(Div(Sub($close, Ref($close, 1)), Ref($close, 1)), 5), 60), Sub(Ref($close, 1), $close))",
+        "final_expr": "Rank(Mean(Sub(Ref($close, 1), $close), 5), 60)",
+        "decision": "reject",
+        "rank_ic": 0.016199,
+        "ic_ir": 0.090906
+      },
+      {
+        "expr": "If(And(Rank(Sum(Sub($close, Ref($close, 1)), 5), 60) > 0.8, Mean(Sub($close, Ref($close, 1)), 5) < 0), Add(Mul($close, 0), 1), Mul($close, 0))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 8,
+    "timestamp": "2026-06-04T23:06:50.417359",
+    "hypothesis": "Grounded in the market microstructure theory of institutional liquidity provision and retail capitulation, stocks exhibiting an extremely low cross-sectional rank in the spread between their closing p",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Sub($close, $open)), 60)",
+        "final_expr": "Rank(Mul(-1, Mean(Sub($close, $open), 5)), 60)",
+        "decision": "reject",
+        "rank_ic": 0.016063,
+        "ic_ir": 0.090363
+      },
+      {
+        "expr": "Rank(Mul(Mul(-1, Sub($close, $open)), $volume), 20)",
+        "final_expr": "Rank(Mean(Mul(Div(Sub($open, $close), Add($close, 1e-10)), $volume), 5), 20)",
+        "decision": "reject",
+        "rank_ic": 0.015866,
+        "ic_ir": 0.103379
+      },
+      {
+        "expr": "Rank(Div(Sub($close, Min($low, 20)), Add(Sub(Max($high, 20), Min($low, 20)), 1e-10)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 9,
+    "timestamp": "2026-06-04T23:28:10.544776",
+    "hypothesis": "Grounded in the market microstructure theory of informed institutional stealth trading versus uninformed retail noise, stocks exhibiting a deeply negative time-series correlation between their overnig",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub(Div($open, Ref($close, 1)), 1), Sub(Div($close, $open), 1), 20)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub(Div($open, Ref($close, 1)), 1), Sub(Div($high, $low), 1), 20)), 20)",
+        "final_expr": "Mean(Div(Rank(Sub(Div($open, Add(Ref($close, 1), 1e-10)), 1), 20), Add(Rank(Sub(Div($high, Add($low, 1e-10)), 1), 20), 1)), 10)",
+        "decision": "reject",
+        "rank_ic": -0.004087,
+        "ic_ir": -0.038163
+      },
+      {
+        "expr": "Rank(Mul(Mul(-1, Corr(Sub(Div($open, Ref($close, 1)), 1), Sub(Div($close, $open), 1), 20)), Div($volume, Add(Mean($volume, 20), 1e-10))), 20)",
+        "final_expr": "Rank(Div(Mean(Mul(-1, Div(Sub(Div($open, Ref($close, 1)), 1), Add(Sub(Div($close, $open), 1), 1e-6))), 60), Add(Std(Sub(Div($close, Ref($close, 1)), 1), 60), 1e-10)), 20)",
+        "decision": "reject",
+        "rank_ic": 0.003484,
+        "ic_ir": 0.047723
+      }
+    ]
+  },
+  {
+    "iteration": 10,
+    "timestamp": "2026-06-04T23:49:20.611660",
+    "hypothesis": "Grounded in Miller’s theory of divergence of opinion and market microstructure price absorption, stocks exhibiting a high cross-sectional rank in their trading-activity-to-volatility ratio—mathematica",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div($volume, Add(Std($close, 20), 1e-10)), 60)",
+        "final_expr": "Rank(Div(Mean($volume, 5), Add(Std($close, 60), 1e-10)), 60)",
+        "decision": "reject",
+        "rank_ic": -0.014519,
+        "ic_ir": -0.109095
+      },
+      {
+        "expr": "Rank(Div(Div($volume, Mean($volume, 20)), Add(Std(Abs(Sub($close, Ref($close, 1))), 10), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div($volume, Add(Sub(Max($high, 5), Min($low, 5)), 1e-10)), 60)",
+        "final_expr": "Rank(Sub(Div($volume, Mean($volume, 50)), Div(Sub(Max($high, 5), Min($low, 5)), Mean(Sub(Max($high, 5), Min($low, 5)), 50))), 60)",
+        "decision": "reject",
+        "rank_ic": -0.000186,
+        "ic_ir": -0.00137
+      }
+    ]
+  },
+  {
+    "iteration": 11,
+    "timestamp": "2026-06-04T23:53:07.394541",
+    "hypothesis": "Grounded in the market microstructure theory of institutional execution benchmarking and inventory risk premiums, stocks exhibiting a high cross-sectional rank in the time-series divergence where thei",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Div(Sub($close, $vwap), Add(Sub($high, $low), 1e-10)), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Sub($close, $open), $volume), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($open, Ref($close, 1)), Add(Sub($high, $low), 1e-10)), 5), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 12,
+    "timestamp": "2026-06-04T23:59:53.358827",
+    "hypothesis": "Grounded in the market microstructure theory of institutional stealth accumulation, stocks exhibiting a high cross-sectional rank in the time-series correlation between daily volume and their VWAP-to-",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 0,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Mean(Mul(Div(Sub($volume, Mean($volume, 20)), Add(Std($volume, 20), 1e-10)), Div(Sub(Div(Sub($close, $vwap), Add($close, 1e-10)), Mean(Div(Sub($close, $vwap), Add($close, 1e-10)), 20)), Add(Std(Div(Sub($close, $vwap), Add($close, 1e-10)), 20), 1e-10))), 20)), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Sub(Add(Mul($close, 0), 1), Abs(Mean(Mul(Div(Sub($volume, Mean($volume, 20)), Add(Std($volume, 20), 1e-10)), Div(Sub(Div(Sub($close, $vwap), Add($close, 1e-10)), Mean(Div(Sub($close, $vwap), Add($close, 1e-10)), 20)), Add(Std(Div(Sub($close, $vwap), Add($close, 1e-10)), 20), 1e-10))), 20))), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mul(-1, Mean(Mul(Div($volume, Add(Mean($volume, 20), 1e-10)), Div(Sub($close, $vwap), Add(Sub($high, $low), 1e-10))), 20)), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 13,
+    "timestamp": "2026-06-05T00:02:12.960838",
+    "hypothesis": "Grounded in cumulative prospect theory and the behavioral \"Max Effect,\" stocks exhibiting a high cross-sectional rank in extreme upside skewness—mathematically defined as the ratio of their daily uppe",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Max(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(If(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)) > 0, Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Mul($close, 0)), 20), Add(Mean(Abs(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10))), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(Power(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 3), 20), Add(Power(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), 3), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 14,
+    "timestamp": "2026-06-05T00:13:56.520544",
+    "hypothesis": "Grounded in the market microstructure theory of institutional liquidity provision during uninformed retail panic, stocks exhibiting a high cross-sectional rank in intraday price depression—mathematica",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Sub($open, $low), Add(Sub($high, $low), 1e-10)), 60)",
+        "final_expr": "Mean(Rank(If(Div(Sub(Ref($open,1), Ref($low,1)), Add(Sub(Ref($high,1), Ref($low,1)), 1e-10)) < Add(Mul($close, 0), 0.01), Add(Mul($close, 0), 0.01), If(Div(Sub(Ref($open,1), Ref($low,1)), Add(Sub(Ref($high,1), Ref($low,1)), 1e-10)) > Add(Mul($close, 0), 0.99), Add(Mul($close, 0), 0.99), Div(Sub(Ref($open,1), Ref($low,1)), Add(Sub(Ref($high,1), Ref($low,1)), 1e-10)))), 20), 5)",
+        "decision": "reject",
+        "rank_ic": 0.004332,
+        "ic_ir": 0.027892
+      },
+      {
+        "expr": "Rank(Div(Mean(If($close < $open, $volume, Mul($close, 0)), 20), Add(Mean($volume, 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($close, $low), Add(Sub($high, $low), 1e-10)), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 15,
+    "timestamp": "2026-06-05T00:16:55.433256",
+    "hypothesis": "Grounded in the \"frog-in-the-pan\" behavioral theory of investor underreaction to continuous information, stocks exhibiting a high cross-sectional rank in their momentum smoothness—mathematically defin",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Std(Delta($close, 1), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(Mul(Delta($close, 1), Ref(Delta($close, 1), 1)), 20), Add(Std(Delta($close, 1), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(Delta($close, 1), 20), Add(Std(Delta($close, 1), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 16,
+    "timestamp": "2026-06-05T00:19:13.937981",
+    "hypothesis": "Grounded in the institutional clientele effect and the microstructure of T+1 markets, stocks exhibiting a low cross-sectional rank in the time-series correlation between their overnight gap returns (o",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mul(-1, Rank(Corr(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Div(Sub($close, $open), Add($open, 1e-10)), 60), 20))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Mul(-1, Rank(Corr(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10)), 60), 20))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Mul(-1, Rank(Corr(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Ref(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 1), 60), 20))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 17,
+    "timestamp": "2026-06-05T00:28:56.593473",
+    "hypothesis": "Grounded in the market microstructure theory of informed stealth accumulation and liquidity depth, stocks exhibiting a consistently low cross-sectional rank in the 20-day time-series correlation betwe",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mul(-1, Rank(Corr($volume, Delta($close, 1), 20), 60))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Mean(Mul(-1, Rank(Corr(Div($volume, Add(Mean($volume, 20), 1e-10)), Delta($close, 1), 20), 60)), 5)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr($volume, Sub($high, $low), 20)), 60)",
+        "final_expr": "Rank(Mean(Mul(-1, Corr(Rank(Div(Sub($close, Ref($close, 10)), Add(Ref($close, 10), 1e-10)), 30), Rank(Sub(Div($volume, Ref($volume, 10)), 1), 30), 30)), 5), 60)",
+        "decision": "reject",
+        "rank_ic": 0.008168,
+        "ic_ir": 0.075847
+      }
+    ]
+  },
+  {
+    "iteration": 18,
+    "timestamp": "2026-06-05T00:31:18.861401",
+    "hypothesis": "Grounded in the market microstructure theory of institutional execution algorithms and late-day information asymmetry, stocks exhibiting a high cross-sectional rank in persistent intraday markup—mathe",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub($close, $open), Add($open, 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($close, $low), Add(Sub($high, $low), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Log(Div($close, Add($open, 1e-10))), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 19,
+    "timestamp": "2026-06-05T00:55:50.421679",
+    "hypothesis": "Grounded in the behavioral theory of investor over-extrapolation and momentum exhaustion, stocks exhibiting a high cross-sectional rank in price deceleration—mathematically formalized as the negative ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Sub(Div(Sub($close, Ref($close, 5)), Add(Ref($close, 5), 1e-10)), Div(Sub($close, Ref($close, 20)), Add(Ref($close, 20), 1e-10)))), 60)",
+        "final_expr": "Mean(Mul(-1, Sub(Rank(Div(Sub($close, Mean($close, 10)), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), 20), Rank(Div(Sub($close, Mean($close, 60)), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), 20))), 5)",
+        "decision": "reject",
+        "rank_ic": 0.00442,
+        "ic_ir": 0.026922
+      },
+      {
+        "expr": "Rank(Mean(Mul(-1, Sub(Add($close, Ref($close, 2)), Mul(2, Ref($close, 1)))), 5), 60)",
+        "final_expr": "Rank(Mean(Mean(Div(Sub(Sub(Mul(2, Ref($close,1)), $close), Ref($close,2)), Add(Std(Sub(Div($close, Ref($close,1)), 1), 20), 1e-8)), 20), 5), 120)",
+        "decision": "reject",
+        "rank_ic": 0.014392,
+        "ic_ir": 0.092719
+      },
+      {
+        "expr": "Rank(Mul(Mean(Mul(-1, Sub(Add($close, Ref($close, 2)), Mul(2, Ref($close, 1)))), 5), Div($volume, Add(Mean($volume, 60), 1e-10))), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 20,
+    "timestamp": "2026-06-05T01:22:58.187031",
+    "hypothesis": "Grounded in the market microstructure principle of price-volume resonance, stocks exhibiting a high cross-sectional rank in \"empty momentum\"—mathematically formalized as the positive divergence betwee",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Sub($close, Ref($close, 1)), Add(Mean($volume, 20), 1e-10)), 20)",
+        "final_expr": "Mean(Rank(Div(Sub($close, Ref($close, 5)), Add(Mul(Std($close, 20), Mean($volume, 20)), 1e-10)), 20), 5)",
+        "decision": "reject",
+        "rank_ic": -0.009987,
+        "ic_ir": -0.062444
+      },
+      {
+        "expr": "Rank(Sub(Rank(Sub($close, Ref($close, 20)), 20), Rank(Mean($volume, 20), 20)), 20)",
+        "final_expr": "Rank(Sub($close, Ref($close, 20)), 20)",
+        "decision": "reject",
+        "rank_ic": -0.010393,
+        "ic_ir": -0.063172
+      },
+      {
+        "expr": "Rank(Div(Div(Sub($close, Ref($close, 1)), Add(Sub($high, $low), 1e-10)), Add(Mean($volume, 20), 1e-10)), 20)",
+        "final_expr": "-1 * Mean(Rank(Div(Sub($close, Ref($close, 5)), Add(Std($close, 20), 1e-10)), 20), 5)",
+        "decision": "reject",
+        "rank_ic": 0.012118,
+        "ic_ir": 0.073903
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "timestamp": "2026-06-05T18:30:00.070340",
+    "hypothesis": "5-day momentum scaled by 20-day volatility predicts next-day returns.",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Sub($close/Ref($close,5),1), Add(Std(Delta($close,1),20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Sub($close, Ref($close,5)), Add(Std(Delta($close,1), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Log($close/Ref($close,5)), Add(Std(Log($close/Ref($close,1)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "timestamp": "2026-06-05T18:33:19.399979",
+    "hypothesis": "5-day momentum scaled by 20-day volatility predicts next-day returns.",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Div(Div(Delta($close, 5), Ref($close, 5)), Add(Std(Div(Delta($close, 1), Ref($close, 1)), 20), 1e-10))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Delta($close, 5), Add(Std(Delta($close, 1), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Div(Sub(Div(Delta($close, 5), Ref($close, 5)), Mean(Div(Delta($close, 5), Ref($close, 5)), 20)), Add(Std(Div(Delta($close, 5), Ref($close, 5)), 20), 1e-10))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "timestamp": "2026-06-05T19:18:06.579060",
+    "hypothesis": "Grounded in the market microstructure theory of institutional stealth execution and liquidity provision, stocks exhibiting a high cross-sectional rank in the rolling time-series mean of their intraday",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div($volume, Add(Mean($volume, 60), 1e-10)), 10), 60)",
+        "final_expr": "Rank(Mul(Rank(Div($volume, Add(Mean($volume, 60), 1e-10)), 20), Mul(-1, Div($close, Add(Ref($close, 20), 1e-8)))), 60)",
+        "decision": "reject",
+        "rank_ic": 0.010554,
+        "ic_ir": 0.075979
+      },
+      {
+        "expr": "Rank(Mean(Div(Abs(Sub($close, Div(Add(Add($high, $low), $close), 3))), Add(Sub($high, $low), 1e-10)), 15), 60)",
+        "final_expr": "Rank(Mean(Div(Sub($close, Div(Add($high, $low), 2)), Add(Sub($high, $low), 1e-10)), 5), 60)",
+        "decision": "reject",
+        "rank_ic": -0.012863,
+        "ic_ir": -0.079261
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "timestamp": "2026-06-05T19:21:05.265904",
+    "hypothesis": "Grounded in the market microstructure dynamics of institutional distribution and retail overreaction, stocks exhibiting a highly negative 20-day rolling correlation between overnight gap returns (open",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank((-1 * Corr(Div(Sub($open, Ref($close,1)), Add(Ref($close,1), 1e-10)), $volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank((-1 * Corr(Div(Sub($open, Ref($close,1)), Add(Ref($close,1), 1e-10)), Div(Sub($close, $open), Add($open, 1e-10)), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank((-1 * Corr(Div(Sub($open, Ref($close,1)), Add(Ref($close,1), 1e-10)), Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "timestamp": "2026-06-05T19:25:27.571837",
+    "hypothesis": "Grounded in the market microstructure theory of institutional stealth distribution, stocks exhibiting a highly negative 20-day rolling correlation between their daily intraday returns (Close minus Ope",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($close, $open), $volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($close, $open), Div($volume, Add(Mean(Abs(Sub($close, $open)), 20), 1e-10)), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Mean(Mul(Sub(($close > $open), ($close < $open)), $volume), 20)), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "timestamp": "2026-06-05T19:36:51.162026",
+    "hypothesis": "Grounded in the behavioral finance theory of lottery preference and institutional distribution, stocks exhibiting a high cross-sectional rank in the 20-day time-series correlation between their daily ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr(Delta($volume,1), Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Div(Sub($close, $low), Add(Sub($high, $low), 1e-10)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr($volume, Abs(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), 20), 60)",
+        "final_expr": "Rank(Mean(Corr(Rank($volume, 20), Rank(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), 60), 5), 60)",
+        "decision": "reject",
+        "rank_ic": -0.002742,
+        "ic_ir": -0.022554
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "timestamp": "2026-06-05T19:47:47.059826",
+    "hypothesis": "Grounded in the behavioral finance theory of panic capitulation and institutional liquidity provision, stocks that exhibit a high cross-sectional rank in the ratio of 20-day downside return variance t",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mul(-1, Rank(Div(Std(If($close < Ref($close,1), Sub($close, Ref($close,1)), Mul($close,0)), 20), Add(Abs(Sub(Min($low,20), Min($low,60))), 1e-8)), 20))",
+        "final_expr": "Add(Mul(0.5, Rank(Mul(-1, Sub(Div($close, Ref($close, 5)), 1)), 20)), Mul(0.5, Rank(Div(Sub(Mean($close, 20), $close), Add(Std($close, 20), 1e-8)), 20)))",
+        "decision": "reject",
+        "rank_ic": 0.012951,
+        "ic_ir": 0.075927
+      },
+      {
+        "expr": "Mul(-1, Rank(Div(Mean(If($close < Ref($close,1), Power(Div(Sub($close, Ref($close,1)), Ref($close,1)), 2), Mul($close,0)), 20), Add(Abs(Sub(Min($low,20), Min($low,60))), 1e-8)), 20))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Mul(-1, Rank(Div(Mul(Std(If($close < Ref($close,1), Div(Sub($close, Ref($close,1)), Ref($close,1)), Mul($close,0)), 20), Std(If($close < Ref($close,1), Div(Sub($close, Ref($close,1)), Ref($close,1)), Mul($close,0)), 20)), Add(Abs(Sub(Min($low,20), Min($low,60))), 1e-8)), 20))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "timestamp": "2026-06-05T20:22:31.955213",
+    "hypothesis": "Grounded in the behavioral finance theory of investor underreaction to gradual information diffusion, stocks exhibiting a high cross-sectional rank in their volume-adjusted momentum acceleration—mathe",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul($volume, Sub(Div(Sub($close, Ref($close,5)), 5), Div(Sub($close, Ref($close,20)), 20))), 60)",
+        "final_expr": "Rank(Mul($volume, Div(Sub(Div($close, Ref($close,5)), Div($close, Ref($close,20))), Std(Div(Sub($close, Ref($close,1)), Ref($close,1)), 20))), 60)",
+        "decision": "reject",
+        "rank_ic": 0.005421,
+        "ic_ir": 0.032182
+      },
+      {
+        "expr": "Rank(Mul(Log($volume), Sub(Div(Sub($close, Ref($close,5)), Ref($close,5)), Div(Sub($close, Ref($close,20)), Ref($close,20)))), 60)",
+        "final_expr": "Mean(Mul(Sub(Div(Log($volume), Add(Mean(Log($volume), 20), 1e-10)), 1), Sub(Div($close, Add(Ref($close, 5), 1e-10)), Div($close, Add(Ref($close, 20), 1e-10)))), 5)",
+        "decision": "reject",
+        "rank_ic": -0.005419,
+        "ic_ir": -0.041848
+      },
+      {
+        "expr": "Rank(Corr($volume, Sub(Sub($close, Ref($close,5)), Sub($close, Ref($close,20))), 20), 60)",
+        "final_expr": "Rank(Div(Sub(Mul(Sub(Div($close, Add(Ref($close, 5), 1e-10)), 1), Div($volume, Add(Mean($volume, 20), 1e-10))), Mean(Mul(Sub(Div($close, Add(Ref($close, 5), 1e-10)), 1), Div($volume, Add(Mean($volume, 20), 1e-10))), 20)), Add(Std(Mul(Sub(Div($close, Add(Ref($close, 5), 1e-10)), 1), Div($volume, Add(Mean($volume, 20), 1e-10))), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "rank_ic": -0.007709,
+        "ic_ir": -0.047675
+      }
+    ]
+  },
+  {
+    "iteration": 7,
+    "timestamp": "2026-06-05T20:26:18.713311",
+    "hypothesis": "Grounded in the market microstructure theory of institutional liquidity absorption, stocks exhibiting a high cross-sectional rank in their 20-day average volume per unit of price range—calculated math",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 1,
+    "results": [
+      {
+        "expr": "Rank(Mean(Mul(Div($volume, Add(Sub($high, $low), 1e-10)), (($close > $open) - ($close < $open))), 20), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Div(Mean(Div($volume, Add(Sub($high, $low), 1e-10)), 20), Add(Mean(Mean(Div($volume, Add(Sub($high, $low), 1e-10)), 20), 60), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 8,
+    "timestamp": "2026-06-05T20:52:14.184576",
+    "hypothesis": "Grounded in the behavioral finance concept of the disposition effect, stocks exhibiting a strongly negative 20-day time-series correlation between daily turnover and their price proximity to the rolli",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank((-1 * Corr($volume, Div(Sub($close, Min($low, 20)), Add(Sub(Max($high, 20), Min($low, 20)), 1e-10)), 20)), 60)",
+        "final_expr": "Mean(Div(Mean(Mul(-1, Mul(Div(Sub($close, Min($low, 60)), Add(Sub(Max($high, 60), Min($low, 60)), 1e-10)), Div($volume, Mean($volume, 60)))), 10), Add(Std($close, 20), 1e-10)), 10)",
+        "decision": "reject",
+        "rank_ic": -0.017079,
+        "ic_ir": -0.092583
+      },
+      {
+        "expr": "Rank((-1 * Mean(Mul(Div(Sub($volume, Mean($volume, 20)), Add(Std($volume, 20), 1e-10)), Div(Sub($close, Mean($close, 20)), Add(Std($close, 20), 1e-10))), 20)), 60)",
+        "final_expr": "Rank(Corr(Div(Sub(Div($close, Ref($close, 1)), 1), Add(Std(Sub(Div($close, Ref($close, 1)), 1), 20), 1e-10)), Div(Sub($volume, Ref($volume, 1)), Add(Ref($volume, 1), 1e-10)), 20), 20)",
+        "decision": "reject",
+        "rank_ic": -0.008159,
+        "ic_ir": -0.070297
+      },
+      {
+        "expr": "Rank((-1 * Corr($volume, Div(Sub($close, $low), Add(Sub($high, $low), 1e-10)), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 9,
+    "timestamp": "2026-06-05T20:54:47.565952",
+    "hypothesis": "Grounded in the market microstructure theory of informed institutional stealth trading, stocks exhibiting a high cross-sectional rank in the 20-day time-series correlation between daily volume and the",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr($volume, Sub($close, Ref($close, 1)), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Rank($volume, 20), Rank(Sub($high, $low), 20), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr($volume, Abs(Sub($close, Ref($close, 1))), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 10,
+    "timestamp": "2026-06-05T21:14:06.479699",
+    "hypothesis": "Grounded in the market microstructure theory of institutional stealth accumulation and T+1 liquidity constraints, stocks exhibiting a high cross-sectional rank in the volatility-adjusted divergence be",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Sub(Div(Sub($close, Ref($close, 1)), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), Div(Sub($volume, Ref($volume, 1)), Add(Std(Sub($volume, Ref($volume, 1)), 20), 1e-10))), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Sub(Div(Sub($high, $low), Add(Std(Sub($high, $low), 20), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), 20), 60)",
+        "final_expr": "Mean(Div(Div(Sub($high, $low), Add(Std(Sub($high, $low), 20), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), 20)",
+        "decision": "reject",
+        "rank_ic": 0.013979,
+        "ic_ir": 0.10627
+      },
+      {
+        "expr": "Rank(Mean(If(And($close > Ref($close, 1), $volume < Ref($volume, 1)), Add(Mul($close, 0), 1), Mul($close, 0)), 20), 60)",
+        "final_expr": "Rank(Mean(Mul(Sub(Div($close, Ref($close, 1)), 1), Sub(Div(Ref($volume, 1), $volume), 1)), 30), 60)",
+        "decision": "reject",
+        "rank_ic": 0.006995,
+        "ic_ir": 0.060785
+      }
+    ]
+  },
+  {
+    "iteration": 11,
+    "timestamp": "2026-06-05T21:37:15.835661",
+    "hypothesis": "Grounded in the market microstructure theory of asymmetric liquidity provision and institutional limit-order absorption, stocks exhibiting a high cross-sectional rank in the 20-day time-series correla",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mul(Rank(Corr(Sub(Div($volume, Add(Mean($volume,20), 1e-10)), 1), Sub(Ref($close,1), $close), 20), 20), Div(Sub(Mean($volume,5), $volume), Add(Mean($volume,5), 1e-10)))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Mul(Rank(Corr(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), Sub(Div($volume, Add(Mean($volume,20), 1e-10)), 1), 20), 20), Div(Sub(Mean($volume,5), $volume), Add(Mean($volume,5), 1e-10)))",
+        "final_expr": "Rank(Mean(Sub(Rank(Div(Sub($high,$close),Add(Sub($high,$low),1e-10)),60), Rank(Div(Sub($volume,Mean($volume,10)),Add(Std($volume,10),1e-10)),60)),20),60)",
+        "decision": "reject",
+        "rank_ic": 0.006701,
+        "ic_ir": 0.043059
+      },
+      {
+        "expr": "Mul(Rank(Corr(If($open > $close, Div(Sub($open, $close), $open), Mul($close,0)), Sub(Div($volume, Add(Mean($volume,20), 1e-10)), 1), 20), 20), Div(Sub(Mean($volume,5), $volume), Add(Mean($volume,5), 1e-10)))",
+        "final_expr": "Mul(-1, Rank(Mean(Corr(Mean(If($open > $close, Div(Sub($open, $close), $open), Mul($close, 0)), 5), Mean(Sub(Div($volume, Add(Mean($volume, 20), 1e-10)), Add(Mul($close, 0), 1)), 5), 60), 5), 20))",
+        "decision": "reject",
+        "rank_ic": 0.004865,
+        "ic_ir": 0.051538
+      }
+    ]
+  },
+  {
+    "iteration": 12,
+    "timestamp": "2026-06-05T21:40:29.709657",
+    "hypothesis": "Grounded in the behavioral finance theory of retail overreaction and institutional distribution, stocks exhibiting a high cross-sectional rank in the 20-day time-series correlation between overnight r",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr(Sub($open, Ref($close, 1)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($open, Ref($close, 1)), $amount, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($open, Ref($close, 1)), Div($volume, Add(Mean($volume, 20), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 13,
+    "timestamp": "2026-06-05T21:47:05.051021",
+    "hypothesis": "Grounded in the market microstructure theory of institutional VWAP execution and late-day retail momentum chasing, stocks exhibiting a high cross-sectional rank in the 20-day time-series correlation b",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 0,
+    "results": [
+      {
+        "expr": "Mul(Rank(Corr($volume, Sub($close, $vwap), 20), 60), Mean(If(And($close < $open, $open > Ref($close, 1)), Div($volume, $volume), Mul($close, 0)), 5))",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Mul(Rank(Corr($volume, Sub($close, $vwap), 20), 60), Mean(Sub(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Div(Sub($close, $open), Add($open, 1e-10))), 5))",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Add(Rank(Corr($volume, Sub($close, $vwap), 20), 60), Mean(If(And($close < $open, $open > Ref($close, 1)), Div($volume, $volume), Mul($close, 0)), 5)), 20)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 14,
+    "timestamp": "2026-06-05T22:11:29.158040",
+    "hypothesis": "Grounded in the market microstructure theory of institutional stealth accumulation and end-of-day price manipulation, stocks exhibiting a high cross-sectional rank in the 10-day moving average of the ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Mul(Div(Sub($close, Div(Add($high, $low), 2)), Add(Sub($high, $low), 1e-10)), $volume), 10), 60)",
+        "final_expr": "Mul(-1, Mean(Mul(Div(Sub(Div(Sub($close, Div(Add($high,$low),2)), Add(Sub($high,$low), 1e-10)), Mean(Div(Sub($close, Div(Add($high,$low),2)), Add(Sub($high,$low), 1e-10)), 20)), Add(Std(Div(Sub($close, Div(Add($high,$low),2)), Add(Sub($high,$low), 1e-10)), 20), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), 10))",
+        "decision": "reject",
+        "rank_ic": 0.013664,
+        "ic_ir": 0.089066
+      },
+      {
+        "expr": "Rank(Sub(Mean(If($close > Ref($close, 1), $volume, Mul($close, 0)), 10), Mean(If($close < Ref($close, 1), $volume, Mul($close, 0)), 10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Div(Sub($close, Mean($close, 20)), Add(Mean($close, 20), 1e-10)), $volume), 10), 60)",
+        "final_expr": "Rank(Mean(Mul(Rank(Div(Sub($close, Mean($close, 20)), Add(Std($close, 20), 1e-10)), 20), Rank($volume, 5)), 10), 20)",
+        "decision": "reject",
+        "rank_ic": -0.003315,
+        "ic_ir": -0.023966
+      }
+    ]
+  },
+  {
+    "iteration": 15,
+    "timestamp": "2026-06-05T22:14:42.108083",
+    "hypothesis": "Grounded in the behavioral finance theory of retail capitulation and the microstructure dynamics of institutional inventory absorption, stocks exhibiting a low cross-sectional rank in the 10-day movin",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Mul(-1, Delta($close, 1)), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul($volume, If($close < $open, Add(Mul($close, 0), 1), Mul($close, 0))), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr($volume, Delta($close, 1), 10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 16,
+    "timestamp": "2026-06-05T22:28:49.184919",
+    "hypothesis": "Grounded in the behavioral finance framework of Cumulative Prospect Theory and retail lottery-ticket preference, stocks exhibiting a high cross-sectional rank in their 20-day realized return skewness—",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Mean(((Div(Sub($close, Ref($close,1)), Ref($close,1)) - Mean(Div(Sub($close, Ref($close,1)), Ref($close,1)), 20)) ** 3), 20), Add((Std(Div(Sub($close, Ref($close,1)), Ref($close,1)), 20) ** 3), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Max(Div(Sub($close, Ref($close,1)), Ref($close,1)), 20), Add(Std(Div(Sub($close, Ref($close,1)), Ref($close,1)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(If(Div(Sub($close, Ref($close,1)), Ref($close,1)) > 0, Div(Sub($close, Ref($close,1)), Ref($close,1)), Mul($close,0)), 20), Add(Abs(Mean(If(Div(Sub($close, Ref($close,1)), Ref($close,1)) < 0, Div(Sub($close, Ref($close,1)), Ref($close,1)), Mul($close,0)), 20)), 1e-10)), 60)",
+        "final_expr": "Rank(Div(Sub($close, Ref($close, 20)), Add(Ref($close, 20), 1e-10)), 60)",
+        "decision": "reject",
+        "rank_ic": -0.008481,
+        "ic_ir": -0.047287
+      }
+    ]
+  },
+  {
+    "iteration": 17,
+    "timestamp": "2026-06-05T22:39:49.279744",
+    "hypothesis": "Grounded in the market microstructure theory of stealth trading and informed liquidity absorption, stocks exhibiting a deeply negative 20-day time-series correlation between daily price amplitude (hig",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($high, $low), $volume, 20)), 60)",
+        "final_expr": "Rank(Mean(Mul(-1, Corr(Rank(Sub($high, $low), 10), Rank($volume, 10), 10)), 5), 60)",
+        "decision": "reject",
+        "rank_ic": 0.00527,
+        "ic_ir": 0.06636
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Div(Sub($high, $low), Ref($close, 1)), $volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($high, $low), Mean($volume, 5), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 18,
+    "timestamp": "2026-06-05T23:06:50.353158",
+    "hypothesis": "Grounded in the Amihud illiquidity premium and the market microstructure theory of liquidity shocks, stocks exhibiting a high cross-sectional rank in the 20-day standard deviation of their daily illiq",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Std(Div(Abs(Div(Sub($close, Ref($close, 1)), Ref($close, 1))), Add(Mul($close, $volume), 1e-10)), 20), 60)",
+        "final_expr": "Rank(Mean(Log(Add(Add(Mul($close, 0), 1), Div(Abs(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10))), Add(Mul($close, $volume), 1e-10)))), 20), 60)",
+        "decision": "reject",
+        "rank_ic": 0.0,
+        "ic_ir": 0.0
+      },
+      {
+        "expr": "Rank(Mul(-1, Std(Div(Abs(Log(Div($close, Ref($close, 1)))), Add(Mul($close, $volume), 1e-10)), 20)), 60)",
+        "final_expr": "Rank(Mean(Div(Abs(Log(Div($close, Ref($close, 1)))), Add(Mul($close, $volume), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "rank_ic": -0.004746,
+        "ic_ir": -0.03703
+      },
+      {
+        "expr": "Rank(Std(Div(Abs(Div(Sub($close, Ref($close, 1)), Ref($close, 1))), Add($volume, 1e-10)), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 19,
+    "timestamp": "2026-06-05T23:09:05.572030",
+    "hypothesis": "Grounded in the behavioral anomaly of overnight information overreaction and the microstructure dynamics of institutional intraday accumulation, stocks exhibiting a high cross-sectional rank in the 20",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub($open, Ref($close,1)), Add(Ref($close,1), 1e-10)), 5), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Div($volume, Mean($volume, 20)), Div(Sub($close, $low), Add(Sub($high, $low), 1e-10))), 5), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Mul(Div(Sub($open, Ref($close,1)), Add(Ref($close,1), 1e-10)), Div($volume, Mean($volume, 20)))), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 20,
+    "timestamp": "2026-06-05T23:22:43.675286",
+    "hypothesis": "Grounded in the behavioral finance theory of late-day markup manipulation and institutional distribution, stocks exhibiting a high cross-sectional rank in the 20-day time-series correlation between th",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Corr($close, $volume, 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr($close, $volume, 20), 60)",
+        "final_expr": "WMA(Rank(Div(Mul(-1, Corr($close, $volume, 20)), Add(Std($close, 20), 1e-10)), 20), 5)",
+        "decision": "reject",
+        "rank_ic": 0.007307,
+        "ic_ir": 0.067233
+      },
+      {
+        "expr": "Rank(Corr(Sub($close, Ref($close, 1)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 21,
+    "timestamp": "2026-06-05T23:25:30.960112",
+    "hypothesis": "Grounded in the microstructure theory of capital sedimentation and retail attention decay, stocks exhibiting a high cross-sectional rank in volatility-adjusted volume contraction—mathematically define",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank((-1 * Delta(Div($volume, Add(Sub($high, $low), 1e-10)), 1)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Sub(Add(Mul($close,0),1), Div(Mean(Div($volume, Add(Sub($high, $low), 1e-10)), 5), Mean(Div($volume, Add(Sub($high, $low), 1e-10)), 20))), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Sub(Mean(Div($volume, Add(Std(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), 20), 1e-10)), 20), Mean(Div($volume, Add(Std(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), 20), 1e-10)), 5)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 22,
+    "timestamp": "2026-06-05T23:35:14.750340",
+    "hypothesis": "Grounded in the microstructure theory of stealth institutional accumulation and retail capitulation, stocks exhibiting a high cross-sectional rank in the negative 20-day time-series correlation betwee",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank((-1 * Corr($close, $volume, 20)), 60)",
+        "final_expr": "Rank((-1 * Rank(Corr($close, $volume, 20), 20)), 60)",
+        "decision": "reject",
+        "rank_ic": 0.009023,
+        "ic_ir": 0.080973
+      },
+      {
+        "expr": "Rank((-1 * Corr(Sub($close, Ref($close, 1)), $volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank((-1 * Corr(Div(Sub($close, $low), Add(Sub($high, $low), 1e-10)), $volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 23,
+    "timestamp": "2026-06-05T23:48:02.871318",
+    "hypothesis": "Grounded in the behavioral finance theory of lottery-ticket preference, stocks exhibiting a high cross-sectional rank in 20-day realized positive semi-variance—mathematically defined as the rolling 20",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(If(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)) > 0, (Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10))) ** 2, Mul($close, 0)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean((Div(Add(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Abs(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)))), Add(Mul($close, 0), 2))) ** 2, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(If(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)) > 0, Mul(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), $volume), Mul($close, 0)), 20), 60)",
+        "final_expr": "Mean(Mul(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), If(Div($volume, Mean($volume, 60)) > Add(Mul($close, 0), 5), Add(Mul($close, 0), 5), Div($volume, Mean($volume, 60)))), 30)",
+        "decision": "reject",
+        "rank_ic": -0.014468,
+        "ic_ir": -0.071401
+      }
+    ]
+  },
+  {
+    "iteration": 24,
+    "timestamp": "2026-06-06T00:08:27.021329",
+    "hypothesis": "Grounded in the microstructure theory of stealth institutional liquidity provision, stocks exhibiting a high cross-sectional rank in the 20-day time-series covariance between daily price amplitude ((H",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Mul(Sub(Div(Sub($high, $low), $close), Mean(Div(Sub($high, $low), $close), 20)), Sub($volume, Mean($volume, 20))), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Div(Sub($high, $low), $close), $volume, 20)), 60)",
+        "final_expr": "Rank(Mean(Div(Div(Sub($high, $low), $close), Mean($volume, 20)), 20), 60)",
+        "decision": "reject",
+        "rank_ic": -0.003944,
+        "ic_ir": -0.036124
+      },
+      {
+        "expr": "Rank(Div(Mean(Mul(Div(Sub($high, $low), $close), $volume), 20), Add(Std(Mul(Div(Sub($high, $low), $close), $volume), 20), 1e-10)), 60)",
+        "final_expr": "Rank(Sub(1, Mul(2, Abs(Sub(Rank(Mul(Div(Mean(Sub($high,$low),5), Add(Mean($close,5), 1e-10)), Mean($volume,5)), 60), 0.5)))), 20)",
+        "decision": "reject",
+        "rank_ic": -0.004672,
+        "ic_ir": -0.044558
+      }
+    ]
+  },
+  {
+    "iteration": 25,
+    "timestamp": "2026-06-06T00:15:35.972145",
+    "hypothesis": "Grounded in the microstructure theory of momentum exhaustion and hidden institutional distribution, stocks exhibiting a high cross-sectional rank in the 5-day delta of their VWAP-to-close ratio—mathem",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 0,
+    "results": [
+      {
+        "expr": "Rank(Delta(Div($vwap, $close), 5), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Div(Delta(Div($vwap, $close), 5), Add(Std($close, 20), 1e-10)), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mul(Delta(Div($vwap, $close), 5), Div($volume, Add(Mean($volume, 20), 1e-10))), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 26,
+    "timestamp": "2026-06-06T00:35:24.164319",
+    "hypothesis": "Grounded in the microstructure theory of institutional stealth accumulation, stocks exhibiting a high cross-sectional rank in the 20-day rolling mean of their intraday VWAP-to-Low distance normalized ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Mean(Div(Sub(Div($amount, Add($volume, 1e-10)), $low), Add(Sub($high, $low), 1e-10)), 20)",
+        "final_expr": "Div(Sub(Rank(Div(Div(Sub(Mean(Div($amount, Add($volume, 1e-10)), 5), Mean($low, 5)), Add(Sub(Mean($high, 5), Mean($low, 5)), 1e-10)), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), 60), Mean(Rank(Div(Div(Sub(Mean(Div($amount, Add($volume, 1e-10)), 5), Mean($low, 5)), Add(Sub(Mean($high, 5), Mean($low, 5)), 1e-10)), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), 60), 40)), Add(Std(Rank(Div(Div(Sub(Mean(Div($amount, Add($volume, 1e-10)), 5), Mean($low, 5)), Add(Sub(Mean($high, 5), Mean($low, 5)), 1e-10)), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), 60), 40), 1e-10))",
+        "decision": "reject",
+        "rank_ic": -0.009824,
+        "ic_ir": -0.071579
+      },
+      {
+        "expr": "Mean(Mul(Div(Sub(Div($amount, Add($volume, 1e-10)), $low), Add(Sub($high, $low), 1e-10)), Rank($volume, 20)), 20)",
+        "final_expr": "Rank(Mean(Div(Sub($close, $low), Add(Sub($high, $low), 1e-10)), 5), 60)",
+        "decision": "reject",
+        "rank_ic": -0.01254,
+        "ic_ir": -0.077346
+      },
+      {
+        "expr": "Mean(Div(Sub(Div(Add(Add($high, $low), $close), 3), $low), Add(Sub($high, $low), 1e-10)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 27,
+    "timestamp": "2026-06-06T00:46:40.887573",
+    "hypothesis": "Grounded in the microstructure theory of institutional distribution and retail attention-driven overreaction, stocks exhibiting a high cross-sectional rank in the 10-day rolling time-series correlatio",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr($close, $volume, 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($high, $low), $volume, 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul($volume, Sub($close, $open)), 10), 60)",
+        "final_expr": "Rank(Div(Mul(-1, Mul($volume, Sub($close, $open))), Add(Std(Mul($volume, Sub($close, $open)), 20), 1e-10)), 5)",
+        "decision": "reject",
+        "rank_ic": 0.017047,
+        "ic_ir": 0.109654
+      }
+    ]
+  },
+  {
+    "iteration": 28,
+    "timestamp": "2026-06-06T00:49:06.611362",
+    "hypothesis": "Grounded in the microstructure theory of institutional liquidity provision during retail panic, stocks exhibiting a high cross-sectional rank in the 20-day time-series correlation between their daily ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($close, Ref($close, 1)), $volume, 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Div(Sub($close, $open), Add($open, 1e-10)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($close, Ref($close, 1)), $amount, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 29,
+    "timestamp": "2026-06-06T01:10:32.135913",
+    "hypothesis": "Grounded in Kyle's market microstructure theory regarding informed order flow and market depth, stocks exhibiting a high cross-sectional rank in the 10-day time-series delta of their liquidity absorpt",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Delta(Mul(-1, Div(Abs(Sub($close, Ref($close,1))), Add($volume, 1e-10))), 10), 60)",
+        "final_expr": "Rank(Mean(Mul(-1, Div(Sub($close, $open), Add($volume, 1e-10))), 5), 60)",
+        "decision": "reject",
+        "rank_ic": 0.015254,
+        "ic_ir": 0.08774
+      },
+      {
+        "expr": "Rank(Delta(Div(Sub($close, Div(Add($high, $low), 2)), Add($volume, 1e-10)), 10), 60)",
+        "final_expr": "(-1 * Mean(Rank(Delta(Div(Sub($close, Div(Add($high, $low), 2)), Add($volume, 1e-10)), 10), 60), 5))",
+        "decision": "reject",
+        "rank_ic": 0.014743,
+        "ic_ir": 0.093724
+      },
+      {
+        "expr": "Rank(Delta(Div(Mean($volume, 10), Add(Std(Sub($close, Ref($close,1)), 10), 1e-10)), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 30,
+    "timestamp": "2026-06-06T01:13:59.332361",
+    "hypothesis": "Grounded in the T+1 market microstructure theory of institutional stealth accumulation, stocks exhibiting a high cross-sectional rank in the 20-day rolling difference between their mean overnight gap ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Sub(Mean(Sub($open, Ref($close, 1)), 20), Mean(Sub($open, Ref($close, 1)), 5)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(Sub($open, Ref($close, 1)), 20), Add(Std(Sub($open, Ref($close, 1)), 20), 1e-10)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Sub($open, Ref($close, 1)), Div($volume, Add(Mean($volume, 20), 1e-10))), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "timestamp": "2026-06-06T10:39:01.722910",
+    "hypothesis": "Grounded in the market microstructure theory of institutional stealth accumulation and liquidity-driven price discovery, stocks exhibiting a high cross-sectional rank in the 20-day time-series correla",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr($volume, Delta($close, 1), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr($volume, Div(Sub($high, $low), $close), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Delta($volume, 1), Div(Sub($close, $low), Add(Sub($high, $low), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "timestamp": "2026-06-06T10:42:00.182010",
+    "hypothesis": "Grounded in the behavioral theory of gradual information diffusion and investor underreaction, stocks exhibiting a high cross-sectional rank in trend smoothness—mathematically defined as their 20-day ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank((-1 * Std(Delta($close, 1), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Delta($close, 1), Ref(Delta($close, 1), 1), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank((-1 * Div(Mean(Abs(Delta($close, 1)), 20), Add(Abs(Sub($close, Ref($close, 20))), 1e-10))), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "timestamp": "2026-06-06T10:50:49.966791",
+    "hypothesis": "Grounded in the market microstructure theory of liquidity provision and inventory risk, stocks exhibiting a low cross-sectional rank in the 5-day rolling mean of the ratio between their daily closing ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "(-1 * Rank(Mean(Div($close, Div(Add(Add($high, $low), $close), 3)), 5), 60))",
+        "final_expr": "(-1 * Rank(Mean(Div(Sub(Div($close, Div(Add(Add($high, $low), $close), 3)), Mean(Div($close, Div(Add(Add($high, $low), $close), 3)), 20)), Add(Std(Div($close, Div(Add(Add($high, $low), $close), 3)), 20), 1e-10)), 20), 60))",
+        "decision": "reject",
+        "rank_ic": 0.007969,
+        "ic_ir": 0.053064
+      },
+      {
+        "expr": "(-1 * Rank(Mean(Div($close, Mean($close, 5)), 5), 60))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "(-1 * Rank(Mean(Div(Abs(Sub($close, Ref($close, 1))), Add($volume, 1e-10)), 5), 60))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "timestamp": "2026-06-06T11:02:44.176305",
+    "hypothesis": "Grounded in the market microstructure theory of institutional stealth accumulation, stocks exhibiting a high cross-sectional rank in the 10-day rolling mean of their normalized closing price premium o",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub($close, Mean($close, 20)), Add(Std($close, 20), 1e-10)), 10), 60)",
+        "final_expr": "Rank(Div(Sub($close, Ref($close, 60)), Add(Std(Sub(Div($close, Add(Ref($close, 1), 1e-10)), 1), 60), 1e-10)), 20)",
+        "decision": "reject",
+        "rank_ic": -0.009547,
+        "ic_ir": -0.055074
+      },
+      {
+        "expr": "Rank(Mean(Mul(Div(Sub($close, $open), Add(Sub($high, $low), 1e-10)), Log(Add($volume, 1e-10))), 10), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "timestamp": "2026-06-06T11:05:26.248419",
+    "hypothesis": "Grounded in cumulative prospect theory and the behavioral preference for lottery-like payoffs, stocks exhibiting a high cross-sectional rank in their recent extreme right-tail returns—mathematically d",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Max(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Max(If(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)) > 0, Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Mul($close, 0)), 10), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 10), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Max(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), Add(Mean(Abs(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10))), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "timestamp": "2026-06-06T11:08:52.418721",
+    "hypothesis": "Grounded in the behavioral theory of investor capitulation and the microstructure of liquidity vacuums, stocks exhibiting a profoundly low cross-sectional rank in their 5-day average percentage change",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-8)), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Sub($close, Ref($close,5)), Add(Ref($close,5), 1e-8)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(Div(Sub($close, Ref($close,5)), Add(Ref($close,5), 1e-8)), Div(1, Add(Rank($volume, 20), 0.5))), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 7,
+    "timestamp": "2026-06-06T11:11:15.887424",
+    "hypothesis": "Grounded in the behavioral theory of the disposition effect, stocks exhibiting a profoundly low cross-sectional rank in the 20-day rolling correlation between their intraday returns (Close relative to",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(-1 * Corr(Sub($close/$open, 1), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($close/$open, 1), Sub($high, $low), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(-1 * Corr(Sub($close/$open, 1), Sub(Div($close, Mean($close, 5)), 1), 20), 40)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 8,
+    "timestamp": "2026-06-06T11:20:19.634457",
+    "hypothesis": "Grounded in the market microstructure theory of informed institutional trading, stocks exhibiting a high cross-sectional rank in the 20-day rolling correlation between daily trading volume and intrada",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr($volume, Sub($close, Ref($close, 1)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr($volume, Abs(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10))), 20), 60)",
+        "final_expr": "Rank(Mul(Sub(Mul($close, 0), 1), Sub(Div(Sub($close, Ref($close, 20)), Add(Ref($close, 20), 1e-10)), Div(Sub($volume, Ref($volume, 20)), Add(Ref($volume, 20), 1e-10)))), 60)",
+        "decision": "reject",
+        "rank_ic": -0.008705,
+        "ic_ir": -0.071056
+      },
+      {
+        "expr": "Rank(Corr($volume, Sub($close, $open), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 9,
+    "timestamp": "2026-06-06T11:27:42.907316",
+    "hypothesis": "Grounded in cumulative prospect theory and investor aversion to asymmetric downside risk, stocks exhibiting a low cross-sectional rank in the 20-day skewness of their intraday VWAP deviations—mathemat",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 0,
+    "results": [
+      {
+        "expr": "Rank(-1 * Div(Mean((Sub(Sub($close, $vwap), Mean(Sub($close, $vwap), 20))) ** 3, 20), Add(Std(Sub($close, $vwap), 20) ** 3, 1e-10)), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(-1 * Div(Sub(Mean(If(Sub($close, $vwap) > 0, Sub($close, $vwap), Mul($close, 0)), 20), Mean(If(Sub($close, $vwap) < 0, Sub(Mul($close, 0), Sub($close, $vwap)), Mul($close, 0)), 20)), Add(Std(Sub($close, $vwap), 20), 1e-10)), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(-1 * Div(Mean((Sub($close, $vwap)) ** 3, 20), Add((Mean((Sub($close, $vwap)) ** 2, 20)) ** 1.5, 1e-10)), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 10,
+    "timestamp": "2026-06-06T11:47:38.876472",
+    "hypothesis": "Grounded in noise trader theory and the execution microstructure of the CSI300 market, stocks exhibiting a high cross-sectional rank in the divergence between their 20-day average intraday returns and",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Sub(Div($close, $open), Div($open, Ref($close, 1))), 20), 60)",
+        "final_expr": "Rank(Div(Sub(Div($close, $open), Div($open, Ref($close, 1))), Add(Std(Sub(Div($close, $open), Div($open, Ref($close, 1))), 20), 1e-8)), 60)",
+        "decision": "reject",
+        "rank_ic": -0.024827,
+        "ic_ir": -0.149967
+      },
+      {
+        "expr": "Rank(Mean(Mul(Sub(Div($close, $open), Div($open, Ref($close, 1))), Div($volume, Add(Mean($volume, 20), 1e-10))), 20), 60)",
+        "final_expr": "Rank(Mean(Mul(Sub(Div($close, $open), Div($open, Ref($close, 1))), Div($volume, Add(Mean($volume, 5), 1e-10))), 5), 60)",
+        "decision": "reject",
+        "rank_ic": -0.010066,
+        "ic_ir": -0.063497
+      },
+      {
+        "expr": "Rank(Div(Mean(Sub(Div($close, $open), Div($open, Ref($close, 1))), 20), Add(Std(Sub(Div($close, $open), Div($open, Ref($close, 1))), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 11,
+    "timestamp": "2026-06-06T11:59:21.699063",
+    "hypothesis": "Grounded in the market microstructure theory of institutional distribution and uninformed retail chasing, stocks exhibiting a high cross-sectional rank in the 20-day rolling mean of their VWAP-to-Clos",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Sub(Div(Add(Add($high, $low), $close), Add(Mul(3, $close), 1e-10)), 1), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub(Div(Add($high, $low), 2), $close), Add(Std($close, 20), 1e-10)), 20), 60)",
+        "final_expr": "Rank(Div(Sub(Div(Add($high,$low),2), $close), Add(Mean(If(Sub($high,$low) > Abs(Sub($high, Ref($close,1))), If(Sub($high,$low) > Abs(Sub($low, Ref($close,1))), Sub($high,$low), Abs(Sub($low, Ref($close,1)))), If(Abs(Sub($high, Ref($close,1))) > Abs(Sub($low, Ref($close,1))), Abs(Sub($high, Ref($close,1))), Abs(Sub($low, Ref($close,1))))), 50), 1e-12)), 60)",
+        "decision": "reject",
+        "rank_ic": 0.024877,
+        "ic_ir": 0.143051
+      },
+      {
+        "expr": "Rank(Corr($volume, Sub($close, Div(Add($high, $low), 2)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 12,
+    "timestamp": "2026-06-06T12:15:56.970862",
+    "hypothesis": "Grounded in the stealth trading hypothesis of market microstructure, stocks exhibiting a high cross-sectional rank in the 20-day rolling correlation between their daily price amplitude (High minus Low",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr(Sub($high, $low), $volume, 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($high, $low), $amount, 20), 20)",
+        "final_expr": "Rank(Mean(Div(Sub($high, $low), Add($volume, 1e-10)), 5), 20)",
+        "decision": "reject",
+        "rank_ic": 0.008564,
+        "ic_ir": 0.075902
+      },
+      {
+        "expr": "Rank(Mean(Mul(Sub($high, $low), Log(Add($volume, 1e-10))), 20), 20)",
+        "final_expr": "Rank(Mul(-1, Div(Mean(Mul(Div(Sub($close, $open), Add(Sub($high, $low), 1e-10)), $volume), 20), Mean($volume, 20))), 20)",
+        "decision": "reject",
+        "rank_ic": 0.009354,
+        "ic_ir": 0.060919
+      }
+    ]
+  },
+  {
+    "iteration": 13,
+    "timestamp": "2026-06-06T12:42:02.796773",
+    "hypothesis": "Grounded in the illiquidity premium theory and asset pricing models under asymmetric information, stocks exhibiting a high cross-sectional rank in the 20-day rolling standard deviation of their Amihud",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Std(Div(Abs(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10))), Add(Mul($close, $volume), 1e-10)), 20), 60)",
+        "final_expr": "Mul(-1, Rank(Mean(Std(Div(Abs(Div(Sub($close, $open), Add(Ref($close, 1), 1e-10))), Add(Mean(Mul($close, $volume), 20), 1e-10)), 20), 5), 60))",
+        "decision": "reject",
+        "rank_ic": 0.008944,
+        "ic_ir": 0.07881
+      },
+      {
+        "expr": "Rank(Std(Log(Add(Div(Abs(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10))), Add(Mul($close, $volume), 1e-10)), 1e-10)), 20), 60)",
+        "final_expr": "Rank(Rank(Div(Abs(Div(Sub($close, Ref($close, 1)), Ref($close, 1))), Add(Mul($close, $volume), 1e-10)), 60), 20)",
+        "decision": "reject",
+        "rank_ic": 0.008657,
+        "ic_ir": 0.06999
+      },
+      {
+        "expr": "Rank(Std(Div(Abs(Sub($high, $low)), Add(Mul($close, $volume), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 14,
+    "timestamp": "2026-06-06T12:52:12.378008",
+    "hypothesis": "Grounded in the frog-in-the-pan hypothesis and information diffusion theory, stocks exhibiting a high cross-sectional rank in their volume-penalized price efficiency—calculated mathematically as the 2",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank((Abs(Sub($close, Ref($close, 1))) ** 2) / (Add(Mean($volume, 5), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Sub($high, $low) / (Add(Mean($volume, 10), 1e-10)), 60)",
+        "final_expr": "Mean((Rank(Div(Sub($high, $low), Add(Mean($volume, 10), 1e-10)), 60) - 0.5) ** 2, 5)",
+        "decision": "reject",
+        "rank_ic": -0.004921,
+        "ic_ir": -0.058561
+      },
+      {
+        "expr": "Rank(Abs(Sub($close, Ref($close, 1))) / (Add(Rank($volume, 60), 1)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 15,
+    "timestamp": "2026-06-06T12:54:11.188023",
+    "hypothesis": "Grounded in the temporary price pressure hypothesis of market microstructure, stocks exhibiting a consistently low cross-sectional rank in the 20-day rolling correlation between their daily percentage",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(-1 * Corr(Div(Sub($close, Ref($close, 1)), Ref($close, 1)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Rank(-1 * Corr(Div(Sub($close, Ref($close, 1)), Ref($close, 1)), $volume, 20), 60), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(-1 * Corr(Div(Sub($close, Ref($close, 1)), Ref($close, 1)), Delta($volume, 1), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 16,
+    "timestamp": "2026-06-06T12:57:17.802532",
+    "hypothesis": "Grounded in cumulative prospect theory and the behavioral preference for lottery-like assets, stocks exhibiting a high cross-sectional rank in their volume-weighted return skewness—mathematically calc",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Mean((Sub(Mul($volume, Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), Mean(Mul($volume, Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), 20)))**3, 20), Add(Std(Mul($volume, Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), 20)**3, 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul($volume, (Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)))**2), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Sub(Std(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) > 0, Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), Mul($close,0)), 20), Std(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) < 0, Mul(-1, Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), Mul($close,0)), 20)), Add(Div(Add(Std(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) > 0, Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), Mul($close,0)), 20), Std(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) < 0, Mul(-1, Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), Mul($close,0)), 20)), 2), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 17,
+    "timestamp": "2026-06-06T13:00:35.475888",
+    "hypothesis": "Grounded in the heterogeneous agents model and the overnight sentiment exhaustion hypothesis, stocks exhibiting a low cross-sectional rank in the 20-day rolling correlation between their overnight gap",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "-1 * Rank(Corr(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-8)), Div(Sub($close, $open), Add($open, 1e-8)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "-1 * Rank(Corr(Div(Sub($open, Ref($close, 1)), Add(Sub(Ref($high, 1), Ref($low, 1)), 1e-8)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Div(Add(Mul($close, 0), 1), Add(Rank(Corr(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-8)), Div(Sub($close, $open), Add($open, 1e-8)), 20), 60), 1e-8))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 18,
+    "timestamp": "2026-06-06T13:02:55.560449",
+    "hypothesis": "Grounded in noise trader theory and institutional execution behavior, stocks exhibiting a high cross-sectional rank in their 20-day rolling covariance between daily trading volume and the intraday-to-",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Sub($volume, Mean($volume, 20)) * Sub(Div(Sub($close, $open), $open), Mean(Div(Sub($close, $open), $open), 20)), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr($volume, Div(Sub($close, $open), $open), 20), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Sub($volume, Ref($volume, 1)), If(Div(Sub($close, $open), $open) > 0, Div(Sub($close, $open), $open), Mul($close, 0))), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 19,
+    "timestamp": "2026-06-06T13:05:12.366212",
+    "hypothesis": "Grounded in the informed trading hypothesis and smart money accumulation dynamics, stocks exhibiting a consistently high cross-sectional rank in the 20-day rolling correlation between their intraday p",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Mean(Corr(Div(Sub($high, $low), Add($close, 1e-10)), $volume, 20), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($close, Div(Add($high, $low), 2)), $volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 20,
+    "timestamp": "2026-06-06T13:07:48.531234",
+    "hypothesis": "Grounded in the \"frog-in-the-pan\" hypothesis of behavioral finance, stocks exhibiting a high cross-sectional rank in their 20-day price efficiency ratio—mathematically defined as the absolute 20-day n",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Abs(Sub($close, Ref($close, 20))), Add(Sum(Abs(Sub($close, Ref($close, 1))), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(If(Mean($volume, 20) < Mean($volume, 60), Div(Abs(Sub($close, Ref($close, 20))), Add(Sum(Abs(Sub($close, Ref($close, 1))), 20), 1e-10)), Mul($close, 0)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($close, $open), Add(Sub($high, $low), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 21,
+    "timestamp": "2026-06-06T13:11:33.198085",
+    "hypothesis": "Grounded in the stealth trading hypothesis and institutional order-splitting behavior, stocks exhibiting a consistently high cross-sectional rank in their 20-day rolling average of intraday selling pr",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), $volume), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), 20), Add(Std(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 22,
+    "timestamp": "2026-06-06T13:15:21.698842",
+    "hypothesis": "Grounded in the asymmetric volatility phenomenon and prospect theory's loss aversion, stocks exhibiting a high cross-sectional rank in their 20-day downside-to-upside realized semi-variance ratio—math",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) < 0, (Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))) ** 2, Mul($close,0)), 20), Add(Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) > 0, (Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))) ** 2, Mul($close,0)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) < 0, Abs(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), Mul($close,0)), 20), Add(Mean(If(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)) > 0, Abs(Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10))), Mul($close,0)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(If(Log(Div($close, Add(Ref($close,1), 1e-10))) < 0, (Log(Div($close, Add(Ref($close,1), 1e-10)))) ** 2, Mul($close,0)), 20), Add(Mean(If(Log(Div($close, Add(Ref($close,1), 1e-10))) > 0, (Log(Div($close, Add(Ref($close,1), 1e-10)))) ** 2, Mul($close,0)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 23,
+    "timestamp": "2026-06-06T13:34:51.469430",
+    "hypothesis": "Grounded in the liquidity provision framework and stealth institutional accumulation, stocks exhibiting a high cross-sectional rank in the 20-day rolling correlation between their daily trading volume",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Corr($volume, $close, 20), 60)",
+        "final_expr": "Mean(Sub(Rank(Log(Div($close, Add(Ref($close, 1), 1e-10))), 10), Rank(Log(Div($volume, Add(Ref($volume, 1), 1e-10))), 10)), 5)",
+        "decision": "reject",
+        "rank_ic": -0.017543,
+        "ic_ir": -0.128576
+      },
+      {
+        "expr": "Rank(Corr($volume, Sub($high, $low), 20), 60)",
+        "final_expr": "Mul(-1, Rank(Corr(Sub($close, Mean($close, 20)), Sub($volume, Mean($volume, 20)), 20), 20))",
+        "decision": "reject",
+        "rank_ic": 0.00625,
+        "ic_ir": 0.061489
+      }
+    ]
+  },
+  {
+    "iteration": 24,
+    "timestamp": "2026-06-06T14:03:35.059414",
+    "hypothesis": "Grounded in the attention-induced retail overreaction hypothesis and institutional liquidity provision dynamics, stocks exhibiting a high cross-sectional rank in their 20-day overnight-to-intraday ret",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Sub(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Div(Sub($close, $open), Add($open, 1e-10))), 20), 60)",
+        "final_expr": "Mean(Sub(Div(Div(Sub($close, $open), Add($open, 1e-10)), Add(Std(Div(Sub($close, $open), Add($open, 1e-10)), 20), 1e-10)), Div(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Add(Std(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), 1e-10))), 5)",
+        "decision": "reject",
+        "rank_ic": -0.008566,
+        "ic_ir": -0.060921
+      },
+      {
+        "expr": "Rank(Mean(Div(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Add(Div(Sub($close, $open), Add($open, 1e-10)), 1e-10)), 20), 60)",
+        "final_expr": "Rank(Mean(Rank(Div(Sub($open, Ref($close,1)), Add(Ref($close,1), 1e-10)), 20), 40), 5)",
+        "decision": "reject",
+        "rank_ic": 0.009803,
+        "ic_ir": 0.095416
+      },
+      {
+        "expr": "Rank(Mul(Mean(Sub(Div(Sub($open, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Div(Sub($close, $open), Add($open, 1e-10))), 20), Rank($volume, 60)), 60)",
+        "final_expr": "Rank(Mean(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 5), 60)",
+        "decision": "reject",
+        "rank_ic": -0.01724,
+        "ic_ir": -0.096172
+      }
+    ]
+  },
+  {
+    "iteration": 25,
+    "timestamp": "2026-06-06T14:28:34.357177",
+    "hypothesis": "Grounded in the gradual information diffusion hypothesis and market microstructure theories of informed trading, stocks exhibiting a high cross-sectional rank in their volume-confirmed momentum—mathem",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(Div(Delta($close, 5), Add(Sub(Max($high, 5), Min($low, 5)), 1e-8)), Log($volume)), 20)",
+        "final_expr": "Sub(Add(Mul($close, 0), 0.5), Mean(Rank(Mul(Div(Delta($close, 5), Add(Sub(Max($high, 5), Min($low, 5)), 1e-8)), Log($volume)), 20), 5))",
+        "decision": "reject",
+        "rank_ic": 0.011229,
+        "ic_ir": 0.06632
+      },
+      {
+        "expr": "Rank(Mul(Div(Sub($close, $open), Add(Sub($high, $low), 1e-8)), Delta(Log($volume), 5)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(Div(Sub(Ref($close, 1), Ref($close, 6)), Add(Mean(Sub($high, $low), 20), 1e-8)), Div(Log($volume), Add(Mean(Log($volume), 20), 1e-8))), 20)",
+        "final_expr": "Mul(-1, Div(Add(Rank(Div(Sub(Ref($close, 1), Ref($close, 11)), Add(Mean(Sub($high, $low), 20), 1e-8)), 20), Rank(Div(Log($volume), Add(Mean(Log($volume), 60), 1e-8)), 20)), 2))",
+        "decision": "reject",
+        "rank_ic": 0.00879,
+        "ic_ir": 0.054737
+      }
+    ]
+  },
+  {
+    "iteration": 26,
+    "timestamp": "2026-06-06T14:54:52.024868",
+    "hypothesis": "Grounded in the investor attention hypothesis and informed distribution mechanics, stocks exhibiting a high cross-sectional rank in the product of their sudden turnover spikes and intraday price exhau",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(Div($volume, Add(Mean($volume, 20), 1e-10)), Div(Sub($high, $close), Add(Sub($high, $low), 1e-10))), 60)",
+        "final_expr": "Rank(Ref(Mean(Mul(Div($volume, Add(Mean($volume, 20), 1e-10)), Div(Sub($high, $close), Add(Sub($high, $low), 1e-10))), 5), 1), 60)",
+        "decision": "reject",
+        "rank_ic": -0.007087,
+        "ic_ir": -0.051931
+      },
+      {
+        "expr": "Rank(Mul(Div($volume, Add(Mean($volume, 20), 1e-10)), Sub(Div(Add($high, $low), 2), $close)), 60)",
+        "final_expr": "Rank(Mul(Div($volume, Add(Mean($volume, 20), 1e-10)), Div(Sub(Div(Add($high, $low), 2), $close), Add(Std(Sub(Div(Add($high, $low), 2), $close), 20), 1e-10))), 60)",
+        "decision": "reject",
+        "rank_ic": 0.024073,
+        "ic_ir": 0.139942
+      },
+      {
+        "expr": "Rank(Mul(Div(Delta($volume, 1), Add(Mean($volume, 20), 1e-10)), Div(Sub($open, $close), Add(Sub($high, $low), 1e-10))), 60)",
+        "final_expr": "Rank(Mul(-1, Abs(Mean(Div(Sub(Div(Sub($open, $close), Add($close, 1e-10)), Mean(Div(Sub($open, $close), Add($close, 1e-10)), 60)), Add(Std(Div(Sub($open, $close), Add($close, 1e-10)), 60), 1e-10)), 10))), 60)",
+        "decision": "reject",
+        "rank_ic": 0.013052,
+        "ic_ir": 0.10951
+      }
+    ]
+  },
+  {
+    "iteration": 27,
+    "timestamp": "2026-06-06T15:02:04.994041",
+    "hypothesis": "Grounded in the disposition effect and institutional stealth distribution dynamics, stocks exhibiting a high cross-sectional rank in the 10-day moving average of their VWAP-to-Close ratio—mathematical",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 0,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div($vwap, Add($close, 1e-10)), 10), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($vwap, $close), Add(Sub($high, $low), 1e-10)), 10), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Corr($vwap, $close, 20), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      }
+    ]
+  },
+  {
+    "iteration": 28,
+    "timestamp": "2026-06-06T15:04:02.431716",
+    "hypothesis": "Grounded in the lottery-ticket preference theory and asymmetric risk pricing, stocks exhibiting a high cross-sectional rank in their isolated right-tail skewness—mathematically captured by the ratio o",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Max(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Add(Mean(If(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)) > 0, Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Mul($close, 0)), 20), 1e-10), Add(Abs(Mean(If(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)) < 0, Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Mul($close, 0)), 20)), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 29,
+    "timestamp": "2026-06-06T15:15:56.815624",
+    "hypothesis": "Grounded in the dispersion of beliefs theory and short-sale constraints, stocks exhibiting a high cross-sectional rank in their unconfirmed volatility—mathematically captured by the 20-day moving aver",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean((Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)))**2, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Std(Log($close / Ref($close, 1)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(($high - $low) / ($close + 1e-10), 20), 60)",
+        "final_expr": "Rank(Mul(-1, Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20)), 60)",
+        "decision": "reject",
+        "rank_ic": 0.007449,
+        "ic_ir": 0.050902
+      }
+    ]
+  },
+  {
+    "iteration": 30,
+    "timestamp": "2026-06-06T15:19:22.489968",
+    "hypothesis": "Grounded in the noise trader risk model and the stealth trading hypothesis, stocks exhibiting a high cross-sectional rank in their capacity to absorb overnight sentiment shocks—mathematically defined ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($open, Ref($close, 1)), Sub($close, $open), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(If(Mul(Sub($open, Ref($close, 1)), Sub($close, $open)) < 0, Add(Mul($close, 0), 1), Mul($close, 0)), 60), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Sub($open, Ref($close, 1)), Ref(Sub($open, Ref($close, 1)), 1), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 31,
+    "timestamp": "2026-06-06T15:33:43.265616",
+    "hypothesis": "Grounded in the price-volume divergence principle and the liquidity provider inventory model, stocks exhibiting severe short-term price declines but structurally resilient volume-weighted average pric",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 1,
+    "results": [
+      {
+        "expr": "Rank(Mean(Sub($vwap/Ref($vwap,1), $close/Ref($close,1)), 5), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($vwap, $close), Add(Std($close,20), 1e-10)), 5), 60)",
+        "decision": "syntax_error",
+        "stage": "test_error"
+      },
+      {
+        "expr": "Rank(Mean(If(And($close < Ref($close,1), $vwap > Ref($vwap,1)), $volume, Mul($close,0)), 10), 60)",
+        "final_expr": "Mean(Rank(Mean(If(And($close < Ref($close,1), $open > Ref($open,1)), Mul(Mul(Div(Sub(Ref($close,1), $close), Add(Ref($close,1), 1e-10)), Div(Sub($open, Ref($open,1)), Add(Ref($open,1), 1e-10))), $volume), Sub(Mul($close,0), 1e-10)), 20), 20), 5)",
+        "decision": "reject",
+        "rank_ic": -0.005187,
+        "ic_ir": -0.045979
+      }
+    ]
+  },
+  {
+    "iteration": 32,
+    "timestamp": "2026-06-06T15:44:56.767672",
+    "hypothesis": "Grounded in the frog-in-the-pan hypothesis and limited investor attention to continuous information diffusion, stocks that exhibit a high cross-sectional rank in their risk-adjusted true-cost momentum",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub($close, Ref($close, 20)), Add(Mul(Std($close, 20), Mean(Sub($high, $low), 20)), 1e-10)), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Sub($close, Ref($close, 5)), Add(Mul(Std($close, 5), Div(Sub($high, $low), Add($close, 1e-10))), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($close, Ref($close, 20)), Add(Mul(Std($close, 20), Div(Std($volume, 20), Add(Mean($volume, 20), 1e-10))), 1e-10)), 5), 60)",
+        "final_expr": "Rank(Mean(Div(Sub($close, Ref($close, 20)), Add(Std($close, 20), 1e-10)), 10), 20)",
+        "decision": "reject",
+        "rank_ic": -0.007896,
+        "ic_ir": -0.055902
+      }
+    ]
+  },
+  {
+    "iteration": 33,
+    "timestamp": "2026-06-06T15:47:33.772147",
+    "hypothesis": "Grounded in the institutional inventory accumulation model and the stealth trading hypothesis, stocks exhibiting a high cross-sectional rank in their intraday markdown divergence signal that informed ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub($close, $open), Add(Sub($high, $low), 1e-10)), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Div(Sub($open, $close), Add(Sub($high, $low), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Corr(Sub($close, Ref($close, 1)), $volume, 20), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 34,
+    "timestamp": "2026-06-06T15:50:57.262583",
+    "hypothesis": "Grounded in the stealth trading hypothesis and institutional order-splitting behavior, stocks exhibiting a high cross-sectional rank in their hidden intraday accumulation—mathematically captured by th",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(If($close > $open, Div(Mul(Div(Sub($close, $open), Add(Sub($high, $low), 1e-10)), $volume), Add(Mean($volume, 20), 1e-10)), Mul($close, 0)), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr($volume, $close, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Mul(Sub($close, $open), $volume), Add(Sub($high, $low), 1e-10)), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 35,
+    "timestamp": "2026-06-06T16:03:35.728828",
+    "hypothesis": "Grounded in Cumulative Prospect Theory and the lottery-preference hypothesis, retail investors systematically overprice assets exhibiting attention-driven, right-tail payoff spikes. Consequently, stoc",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Max(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-8)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Sub(Max($close, 20), Mean($close, 20)), Add(Sub(Mean($close, 20), Min($close, 20)), 1e-8)), 60)",
+        "final_expr": "Rank(Mean(Div(Sub(Rank($high, 60), Mean($close, 60)), Add(Std($close, 60), 1e-6)), 10), 60)",
+        "decision": "reject",
+        "rank_ic": 0.00805,
+        "ic_ir": 0.066232
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($high, $close), Add(Sub($high, $low), 1e-8)), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 36,
+    "timestamp": "2026-06-06T16:39:43.340808",
+    "hypothesis": "Grounded in reference-dependent preferences and the disposition effect, stocks approaching their rolling 20-day maximum price while simultaneously exhibiting a cross-sectional decay in trading volume ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Add(Rank(Mul(-1, Sub(Max($high, 20), $close)), 60), Rank(Mul(-1, Delta($volume, 1)), 60)), 60)",
+        "final_expr": "Rank(Mean(Div(Add(Sub(Div($close, Ref(Max($high, 20), 1)), 1), Mul(-1, Mean(Div(Delta($volume, 1), Ref(Std($volume, 20), 1)), 5))), 2), 5), 60)",
+        "decision": "reject",
+        "rank_ic": 0.004338,
+        "ic_ir": 0.038505
+      },
+      {
+        "expr": "Rank(Mul(Div($close, Max($high, 20)), Mul(-1, Mean(Delta($volume, 1), 5))), 60)",
+        "final_expr": "Mul(-1, Rank(Div(Div(Mean($close, 20), Max($high, 60)), Add(Std($close, 60), 1e-10)), 60))",
+        "decision": "reject",
+        "rank_ic": 0.007218,
+        "ic_ir": 0.055187
+      },
+      {
+        "expr": "Rank(Add(Rank(Mul(-1, Sub(Max($high, 20), $close)), 60), Rank(Mul(-1, Div($volume, Mean($volume, 20))), 60)), 60)",
+        "final_expr": "Rank(Rank(Div(Div(Div($volume, Add(Mean($volume, 20), 1e-10)), Add(Mean(Abs(Sub($close, Mean($close, 20))), 20), 1e-10)), Div($close, Max($high, 20))), 20), 20)",
+        "decision": "reject",
+        "rank_ic": 0.00736,
+        "ic_ir": 0.070555
+      }
+    ]
+  },
+  {
+    "iteration": 37,
+    "timestamp": "2026-06-06T17:06:58.506522",
+    "hypothesis": "Grounded in the inventory risk premium theory and microstructure liquidity shocks, stocks exhibiting a high cross-sectional rank in their intraday markdown—mathematically captured by the ratio of the ",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), 20)",
+        "final_expr": "Rank(Mean(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), 5), 20)",
+        "decision": "reject",
+        "rank_ic": 0.01324,
+        "ic_ir": 0.086398
+      },
+      {
+        "expr": "Rank(Mul(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), 60)",
+        "final_expr": "Ref(Mean(Rank(Mul(Div(Sub(Div(Sub($high,$close),Add(Sub($high,$low),1e-10)), Mean(Div(Sub($high,$close),Add(Sub($high,$low),1e-10)), 20)), Std(Div(Sub($high,$close),Add(Sub($high,$low),1e-10)), 20)), Div(Sub(Div($volume,Add(Mean($volume,60),1e-10)), Mean(Div($volume,Add(Mean($volume,60),1e-10)), 20)), Std(Div($volume,Add(Mean($volume,60),1e-10)), 20))), 60), 10), 1)",
+        "decision": "reject",
+        "rank_ic": 0.002819,
+        "ic_ir": 0.027126
+      },
+      {
+        "expr": "Rank(Delta(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), 1), 20)",
+        "final_expr": "Rank(Delta(Mean(Div(Sub($high, $close), Add(Sub($high, $low), 1e-10)), 5), 10), 20)",
+        "decision": "reject",
+        "rank_ic": 0.015165,
+        "ic_ir": 0.100918
+      }
+    ]
+  },
+  {
+    "iteration": 38,
+    "timestamp": "2026-06-06T17:10:08.420531",
+    "hypothesis": "Grounded in the noise trader hypothesis and the overnight-intraday pricing dichotomy, retail-driven overnight overreaction is systematically exploited by institutional intraday distribution. Mathemati",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Corr(Div($open, Ref($close, 1)), Div($close, $open), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Div($volume, Add(Mean($volume, 20), 1e-10)), Mul(If($open > Ref($close, 1), Sub(Mul($close,0), 1), If($open < Ref($close, 1), Add(Mul($close,0), 1), Mul($close,0))), Div(Sub($close, $open), Add(Std($close, 20), 1e-10)))), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(-1, Mul(Ref(Div(Sub($open, Ref($close, 1)), Add(Std($close, 20), 1e-10)), 1), Div(Sub($close, $open), Add(Std($close, 20), 1e-10)))), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 39,
+    "timestamp": "2026-06-06T17:32:11.806490",
+    "hypothesis": "Grounded in asymmetric risk aversion and the liquidity provision theory, stocks exhibiting a high cross-sectional rank in downside volatility alongside a tightly bounded distance between their Close a",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Add(Mul(Mul(-1, Rank(Std(If($close < Ref($close, 1), Sub($close, Ref($close, 1)), Mul($close, 0)), 20), 60)), 0.5), Mul(Rank(Sub(1, Div(Abs(Sub($close, $high)), Add(Sub($high, $low), 1e-10))), 60), 0.5)), 60)",
+        "final_expr": "Rank(Add(Mul(Mul(-1, Rank(Div(Std(If($close < Ref($close, 1), Sub($close, Ref($close, 1)), Mul($close, 0)), 20), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), 60)), 0.5), Mul(Rank(Div(Sub(1, Div(Abs(Sub($close, $high)), Add(Sub($high, $low), 1e-10))), Add(Std(Sub($close, Ref($close, 1)), 20), 1e-10)), 60), 0.5)), 60)",
+        "decision": "reject",
+        "rank_ic": -0.016595,
+        "ic_ir": -0.106253
+      },
+      {
+        "expr": "Rank(Add(Mul(Mul(-1, Rank(Std(If($close < $open, Sub($close, $open), Mul($close, 0)), 20), 60)), 0.3), Mul(Rank(Div(Sub($close, Min($low, 20)), Add(Sub(Max($high, 20), Min($low, 20)), 1e-10)), 60), 0.7)), 60)",
+        "final_expr": "Rank(Div(Sub(1, Div($close, Add(Ref($close, 5), 1e-10))), Add(Std(Sub(1, Div($close, Add(Ref($close, 1), 1e-10))), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "rank_ic": 0.015505,
+        "ic_ir": 0.0864
+      },
+      {
+        "expr": "Rank(Add(Mul(Mul(-1, Rank(Mean(If($close < Ref($close, 1), Add(Mul($close, 0), 1), Mul($close, 0)), 20), 60)), 0.4), Mul(Rank(Sub(1, Div(Abs(Sub($close, Mean($close, 20))), Add(Mean($close, 20), 1e-10))), 60), 0.6)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 40,
+    "timestamp": "2026-06-06T17:57:04.071039",
+    "hypothesis": "Grounded in the capitulation hypothesis and liquidity exhaustion models, localized surges in trading volume during sharp price drawdowns signal a terminal transfer of inventory from panic-driven retai",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(If(Sub($close, Ref($close, 1)) < 0, -1 * Sub($close, Ref($close, 1)), Mul($close, 0)), Div($volume, Add(Mean($volume, 60), 1e-10))), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(If(And(Sub($close, Ref($close, 1)) < Mul(-1, Std(Sub($close, Ref($close, 1)), 20)), $volume > Add(Mean($volume, 20), Std($volume, 20))), Add(Mul($close, 0), 1), Mul($close, 0)), 20)",
+        "final_expr": "Rank(Ref(Mean(If(Mul(Mul(-1, Div(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), Add(Mul($close, 0), 1e-10))), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), Add(Mul($close, 0), 1e-10))), 20), Add(Mul($close, 0), 1e-10)))), Div(Sub($volume, Mean($volume, 20)), Add(Std($volume, 20), Add(Mul($close, 0), 1e-10)))) > Add(Mul($close, 0), 3), Add(Mul($close, 0), 3), If(Mul(Mul(-1, Div(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), Add(Mul($close, 0), 1e-10))), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), Add(Mul($close, 0), 1e-10))), 20), Add(Mul($close, 0), 1e-10)))), Div(Sub($volume, Mean($volume, 20)), Add(Std($volume, 20), Add(Mul($close, 0), 1e-10)))) < Sub(Mul($close, 0), 3), Sub(Mul($close, 0), 3), Mul(Mul(-1, Div(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), Add(Mul($close, 0), 1e-10))), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), Add(Mul($close, 0), 1e-10))), 20), Add(Mul($close, 0), 1e-10)))), Div(Sub($volume, Mean($volume, 20)), Add(Std($volume, 20), Add(Mul($close, 0), 1e-10)))))), 10), 1), 20)",
+        "decision": "reject",
+        "rank_ic": 0.010526,
+        "ic_ir": 0.090301
+      },
+      {
+        "expr": "Rank(Div(Mean(If(Sub($close, Ref($close, 1)) < 0, $volume, Mul($close, 0)), 20), Add(Mean(If(Sub($close, Ref($close, 1)) > 0, $volume, Mul($close, 0)), 20), 1e-10)), 20)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 41,
+    "timestamp": "2026-06-06T17:59:38.013952",
+    "hypothesis": "Grounded in the \"frog-in-the-pan\" behavioral hypothesis of limited investor attention, steady and continuous price trends suffer from systematic retail underreaction compared to abrupt, high-volatilit",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Div(Delta($close, 60), Add(Std(Sub($close, Ref($close, 1)), 60), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Abs(Delta($close, 60)), Add(Sum(Abs(Sub($close, Ref($close, 1))), 60), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Corr(Sub($close, Ref($close, 1)), Ref(Sub($close, Ref($close, 1)), 1), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 42,
+    "timestamp": "2026-06-06T18:12:14.048528",
+    "hypothesis": "Grounded in Miller’s divergence of opinion hypothesis and the presence of short-sale constraints, stocks exhibiting a simultaneous surge in intraday price dispersion and abnormal trading volume are sy",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Rank(Sub($high, $low), 20) * Rank($volume, 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Div(Sub($high, $low), $close) * Div($volume, Mean($volume, 20)), 20), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(If(And(Sub($high, $low) > Mean(Sub($high, $low), 20), $volume > Mean($volume, 20)), Add(Mul($close, 0), 1), Mul($close, 0)), 20), 60)",
+        "final_expr": "Rank(Div(Mean(Mul(Mul(Div(Sub($high, $low), Add(Mean(Sub($high, $low), 20), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), Sub(Div($close, $open), 1)), 20), Add(Std(Mul(Mul(Div(Sub($high, $low), Add(Mean(Sub($high, $low), 20), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), Sub(Div($close, $open), 1)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "rank_ic": -0.008499,
+        "ic_ir": -0.054174
+      }
+    ]
+  },
+  {
+    "iteration": 43,
+    "timestamp": "2026-06-06T18:24:02.112591",
+    "hypothesis": "Grounded in the disposition effect and capital gains overhang theory, stocks experiencing upward price momentum on structurally declining turnover face minimal latent selling pressure from eager profi",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "If(And(Delta($close, 20) > 0, Delta($volume, 20) < 0), Rank(Delta($close, 20), 60), Mul($close, 0))",
+        "final_expr": "Mean(Rank(Delta($close, 20), 60) * Rank(Mul(-1, Delta($volume, 20)), 60), 5)",
+        "decision": "reject",
+        "rank_ic": 0.008055,
+        "ic_ir": 0.055504
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr(Delta($close, 5), Delta($volume, 5), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(Delta($close, 20), Sub(1, Div($volume, Add(Mean($volume, 60), 1e-10)))), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 44,
+    "timestamp": "2026-06-06T18:26:04.308346",
+    "hypothesis": "Grounded in market microstructure theories of dealer inventory risk and liquidity absorption, stocks exhibiting a cross-sectionally high surge in trading volume coupled with a localized rolling compre",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Add(Rank(Div($volume, Mean($volume, 20)), 60), Mul(-1, Rank(Mean(Sub($high, $low), 20), 60)))",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Div($volume, Mean($volume, 20)), Add(Mean(Sub($high, $low), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mul(-1, Corr($volume, Sub($high, $low), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 45,
+    "timestamp": "2026-06-06T18:39:40.212410",
+    "hypothesis": "Grounded in market microstructure theories of informed institutional distribution versus uninformed retail sentiment, stocks exhibiting a persistently strong negative rolling covariance between overni",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mul(-1, Mean(Mul(Sub(Div(Sub($open, Ref($close,1)), Add(Ref($close,1),1e-10)), Mean(Div(Sub($open, Ref($close,1)), Add(Ref($close,1),1e-10)), 20)), Sub(Div(Sub($close,$open), Add($open,1e-10)), Mean(Div(Sub($close,$open), Add($open,1e-10)), 20))), 20)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Mean(Div(Sub($open, Ref($close,1)), Add(Ref($close,1),1e-10)), 10), Add(Mean(Div(Sub($close,$open), Add($open,1e-10)), 10), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(-1, Mul(If(Div(Sub($open, Ref($close,1)), Add(Ref($close,1),1e-10)) > 0, Add(Mul($close,0),1), Sub(Mul($close,0),1)), If(Div(Sub($close,$open), Add($open,1e-10)) > 0, Add(Mul($close,0),1), Sub(Mul($close,0),1)))), 20), 60)",
+        "final_expr": "Rank(Mean(Div(Mul(-1, Sub(Div($open, Ref($close, 1)), 1)), Add(Std(Mul(-1, Sub(Div($open, Ref($close, 1)), 1)), 20), 1e-10)), 10), 60)",
+        "decision": "reject",
+        "rank_ic": 0.006903,
+        "ic_ir": 0.056961
+      }
+    ]
+  },
+  {
+    "iteration": 46,
+    "timestamp": "2026-06-06T18:42:00.774138",
+    "hypothesis": "Grounded in the lottery preference hypothesis and limited investor attention, stocks exhibiting extreme right-tail return skewness—mathematically captured by the cross-sectional rank of their maximum ",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Div(Sub(Max(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), Mean(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20)), Add(Std(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Div(Max(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20), Add(Abs(Min(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), 20)), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 47,
+    "timestamp": "2026-06-06T18:45:15.305382",
+    "hypothesis": "Grounded in the liquidity provision theory and behavioral overreaction, stocks experiencing a sharp price decline on surging volume followed immediately by a cross-sectional compression in rolling vol",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Mul(Mul(-1, Delta($close, 5)), Mul(Div($volume, Mean($volume, 20)), Sub(1, Rank(Std($close, 20), 60)))), 10), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(If(And(Rank(Delta($close, 5), 20) < 0.2, And(Rank(Div($volume, Mean($volume, 20)), 20) > 0.8, Rank(Std($close, 20), 60) < 0.2)), Div(Mul(-1, Delta($close, 5)), Add(Rank(Std($close, 20), 60), 1e-10)), Mul($close, 0)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank(Mean(Mul(Mul(-1, Sub($close, Ref($close, 1))), Mul(Div($volume, Mean($volume, 10)), Sub(1, Rank(Std($close, 10), 60)))), 5), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 48,
+    "timestamp": "2026-06-06T18:54:46.727728",
+    "hypothesis": "Grounded in the \"frog-in-the-pan\" behavioral hypothesis of limited investor attention, stocks exhibiting a cross-sectionally high continuous drift—mathematically captured by the rank of the rolling ti",
+    "expressions": 2,
+    "accepted": 0,
+    "rejected": 2,
+    "results": [
+      {
+        "expr": "Rank(Mean(If($close > Ref($close, 1), Add(Mul($close, 0), 1), Mul($close, 0)), 20), 60)",
+        "final_expr": "Rank(Div(Sub(Div($close, Ref($close, 20)), 1), Std(Sub(Div($close, Ref($close, 1)), 1), 20)), 60)",
+        "decision": "reject",
+        "rank_ic": -0.009989,
+        "ic_ir": -0.056329
+      },
+      {
+        "expr": "Rank(Div(Mean(Sub($close, Ref($close, 1)), 20), Add(Std($close, 20), 1e-10)), 60)",
+        "decision": "reject",
+        "stage": "critic_reject"
+      }
+    ]
+  },
+  {
+    "iteration": 49,
+    "timestamp": "2026-06-06T19:28:02.560227",
+    "hypothesis": "Grounded in the theory of heterogeneous beliefs and short-sale constraints, stocks exhibiting a cross-sectionally extreme positive divergence between their rolling volume-weighted average price—calcul",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank(Mean(Div(Sub(Div(Mean(Mul($close, $volume), 20), Add(Mean($volume, 20), 1e-10)), $close), Add(Std($close, 20), 1e-10)), 5), 60)",
+        "final_expr": "Rank(Mul(-1, Abs(Div(Sub($close, Div(Mean(Mul($close, $volume), 20), Add(Mean($volume, 20), 1e-10))), $close))), 20)",
+        "decision": "reject",
+        "rank_ic": 0.011881,
+        "ic_ir": 0.100907
+      },
+      {
+        "expr": "Rank(Mean(Mul(Div(Sub(Div(Mean(Mul($close, $volume), 20), Add(Mean($volume, 20), 1e-10)), $close), Add(Std($close, 20), 1e-10)), Div($volume, Mean($volume, 20))), 5), 60)",
+        "final_expr": "Rank(Sub(Div(Mean(Mul($close, $volume), 20), Add(Mean($volume, 20), 1e-10)), $close), 20)",
+        "decision": "reject",
+        "rank_ic": 0.010195,
+        "ic_ir": 0.059975
+      },
+      {
+        "expr": "Rank(Corr($volume, Sub(Div(Mean(Mul($close, $volume), 20), Add(Mean($volume, 20), 1e-10)), $close), 20), 60)",
+        "final_expr": "Rank(Mean(Rank(Div(Sub(Corr($volume, Sub(Div(Div(Mean(Mul($close,$volume),20), Add(Mean($volume,20), 1e-10)), $close), 1), 40), Mean(Corr($volume, Sub(Div(Div(Mean(Mul($close,$volume),20), Add(Mean($volume,20), 1e-10)), $close), 1), 40), 20)), Add(Std(Corr($volume, Sub(Div(Div(Mean(Mul($close,$volume),20), Add(Mean($volume,20), 1e-10)), $close), 1), 40), 20), 1e-10)), 40), 5), 60)",
+        "decision": "reject",
+        "rank_ic": 0.003337,
+        "ic_ir": 0.03073
+      }
+    ]
+  },
+  {
+    "iteration": 50,
+    "timestamp": "2026-06-06T19:48:21.121119",
+    "hypothesis": "Grounded in the behavioral theory of retail capitulation and institutional liquidity provision, stocks exhibiting a cross-sectionally extreme negative rolling time-series covariance between daily perc",
+    "expressions": 3,
+    "accepted": 0,
+    "rejected": 3,
+    "results": [
+      {
+        "expr": "Rank( Mul( Mul( Rank( Mul(-1, Corr( Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), Div(Sub($volume, Ref($volume,1)), Add(Ref($volume,1), 1e-10)), 20 ) ), 60 ), Rank( Div($volume, Add(Mean($volume,20), 1e-10)), 60 ) ), Rank( Mul(-1, Delta($close,5)), 60 ) ), 60 )",
+        "decision": "reject",
+        "stage": "critic_reject"
+      },
+      {
+        "expr": "Rank( If( And( Corr( Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), Div(Sub($volume, Ref($volume,1)), Add(Ref($volume,1), 1e-10)), 20 ) < Sub(Mul($close,0),0.3), Div($volume, Add(Mean($volume,20), 1e-10)) > Add(Mul($close,0),1.2) ), Mul(-1, Delta($close,5)), Mul($close,0) ), 60 )",
+        "final_expr": "Rank(Mean(Mul(Mul(Mul(-1, Corr(Div(Sub($close, Ref($close, 1)), Add(Ref($close, 1), 1e-10)), Div(Sub($volume, Ref($volume, 1)), Add(Ref($volume, 1), 1e-10)), 20)), Div($volume, Add(Mean($volume, 20), 1e-10))), Mul(-1, Delta($close, 5))), 5), 60)",
+        "decision": "reject",
+        "rank_ic": -0.009413,
+        "ic_ir": -0.073936
+      },
+      {
+        "expr": "Rank( Add( Add( Rank( Mul(-1, Corr( Div(Sub($close, Ref($close,1)), Add(Ref($close,1), 1e-10)), Div(Sub($volume, Ref($volume,1)), Add(Ref($volume,1), 1e-10)), 20 ) ), 60 ), Rank( Div($volume, Add(Mean($volume,20), 1e-10)), 60 ) ), Rank( Mul(-1, Div(Sub($close, Ref($close,5)), Add(Ref($close,5), 1e-10)) ), 60 ) ), 60 )",
+        "final_expr": "Rank(Mean(Mul(Div(Sub($close, Ref($close, 10)), Add(Std($close, 10), 1e-10)), Div($volume, Add(Mean($volume, 20), 1e-10))), 5), 20)",
+        "decision": "reject",
+        "rank_ic": -0.009521,
+        "ic_ir": -0.061287
+      }
+    ]
   }
 ]
